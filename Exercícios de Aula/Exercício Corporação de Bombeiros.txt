@@ -1,0 +1,9 @@
+Pretende-se modelar o sistema de informação que regista os serviços de bombeiros de diversas corporações. As corporações são identificadas por um código único e obrigatório, um nome e pertencem a uma determinada localidade.
+
+Os bombeiros pertencem a uma corporação e têm um número único na sua corporação. Têm também um nome, morada e data de nascimento.
+
+Cada corporação tem várias ambulâncias para efectuar serviços de emergência, sendo que cada ambulância está alocada a apenas uma corporação. Cada ambulância é identificada pela sua matricula, data de matricula, quilómetros acumulados, e pode ser de dois tipos: transporte ou reanimação.
+
+Os serviços têm um identificador gerado pelo sistema, a localidade e a morada onde são efectuados. São efectuados por um ou mais bombeiros numa ambulância ou em certos casos sem ambulância. Quando os serviços são efectuados numa ambulância é necessário registar a distância percorrida no âmbito desse serviço.
+
+Elabore o respectivo modelo EA, completando-o com todas as restrições de integridade aplicacional que existirem.
