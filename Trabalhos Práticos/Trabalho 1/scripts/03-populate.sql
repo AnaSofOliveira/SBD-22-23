@@ -324,11 +324,38 @@ INSERT INTO `cliente`(`nif`, `morada`, `codigo_area_geografica`) VALUES
 
 
 -- ADICIONAR EMENTAS
+-- Restaurante 1
 INSERT INTO `ementa`(`designacao`) VALUES
 	('Almoço'), 
-    ('Jantar'),
-    ('Almoço e Jantar'); 
+    ('Jantar'); 
 
+-- Restaurante 2
+INSERT INTO `ementa`(`designacao`) VALUES
+	('Almoço e Jantar'); 
+    
+-- Restaurante 3
+INSERT INTO `ementa`(`designacao`) VALUES
+	('Almoço e Jantar'); 
+    
+-- Restaurante 4
+INSERT INTO `ementa`(`designacao`) VALUES
+	('Almoço e Jantar');   
+    
+-- Restaurante 5
+INSERT INTO `ementa`(`designacao`) VALUES
+	('Almoço'), 
+    ('Jantar'); 
+
+-- Restaurante 6
+INSERT INTO `ementa`(`designacao`) VALUES
+	('Almoço'), 
+    ('Jantar'), 
+    ('Almoço e Jantar'); 
+    
+-- Restaurante 7
+INSERT INTO `ementa`(`designacao`) VALUES
+	('Almoço'), 
+    ('Jantar'); 
 
 -- ADICIONAR HORARIOS DAS EMENTAS DOS RESTAURANTES
 	-- Restaurante 1
@@ -411,5 +438,85 @@ INSERT INTO `ementa`(`designacao`) VALUES
 		(7, 2, 17),
 		(7, 2, 19);
 
--- ADICIONAR RESERVAS
--- TODO
+-- ADICIONAR ITENS DAS EMENTAS DOS RESTAURANTES
+INSERT INTO `itens_ementa` VALUES 
+	(1,1,10),
+(1,2,10),
+(2,3,3),
+(2,4,15),
+(1,5,2.5),
+(2,5,3),
+(1,6,2.5),
+(2,6,3),
+(3,7,13),
+(3,8,13),
+(3,9,2.5),
+(3,10,2.5),
+(3,11,13),
+(3,24,2.5),
+(3,13,13),
+(3,14,3),
+(3,15,3),
+(3,16,13),
+(3,17,13),
+(1,35,2.5),
+(3,19,13),
+(3,20,3),
+(3,21,3),
+(3,22,3),
+(3,23,3),
+(1,36,2.5),
+(1,43,2.5),
+(3,26,13),
+(3,27,13),
+(3,28,3),
+(3,29,3),
+(3,30,3),
+(3,31,3),
+(1,32,10),
+(1,33,10),
+(2,34,15),
+(1,44,2.5),
+(2,35,3),
+(1,45,2.5),
+(2,36,3),
+(1,37,10),
+(3,37,13),
+(1,38,10),
+(3,38,13),
+(1,39,4),
+(2,39,5),
+(1,49,2.5),
+(2,40,15),
+(3,40,13),
+(2,41,15),
+(3,41,13),
+(2,42,15),
+(3,42,13),
+(1,50,2.5),
+(2,43,3),
+(3,43,3),
+(3,12,4.5),
+(2,44,3),
+(3,44,3),
+(3,18,4.5),
+(2,45,3),
+(3,45,3),
+(1,46,10),
+(1,47,10),
+(2,48,15),
+(3,25,4.5),
+(2,49,3),
+(3,39,4.5),
+(2,50,3);
+
+-- ADICIONAR RESERVA
+
+
+-- ADICIONAR EMENTA_RESERVADA
+
+
+-- ADICIONAR CARACTERISTICAS_RESERVA
+
+
+-- ADICIONAR ITENS_PREFERIDOS_CLIENTE
