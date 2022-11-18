@@ -1,0 +1,29 @@
+-- 1 - Nome dos alunos inscritos em 2022
+
+-- 2 nome dos alunos e dados dos seus veículos se existirem.
+
+-- 3 alunos inscritos em TI 2021
+
+-- 4 Para o aluno 'Manel Jaquim' listar as disciplinas com notas lançadas, ano, disciplina e nota
+
+-- 5 Número de disciplinas em que cada aluno esta inscrito 
+
+-- 6 Número de disciplinas em que cada aluno esta inscrito por ano
+
+-- 7 Por disciplina número de alunos inscrito
+
+-- 8 Por disciplina e ano número de alunos inscrito
+
+-- 9 Por disciplina e ano número de alunos inscritos que completaram a disciplina com mais de 15
+
+-- 10 Por ano quantos alunos estão inscritos ordenado por ano crescente
+
+
+
+-- 11 Por ano quantos alunos estão inscritos ordenado por número de inscritos decrescente
+
+-- 12 listar o nome dos alunos e as disciplinas por ano indicando quantos colegas têm na mesma disciplina
+
+-- 13 lista de alunos cuja nota na disciplina é inferior à média nessa disciplina desse ano
+
+-- 14 listar alunos em disciplinas por ano que tenham 3 ou mais alunos
