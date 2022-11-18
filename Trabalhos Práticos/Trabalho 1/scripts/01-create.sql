@@ -3,8 +3,8 @@ CREATE DATABASE IF NOT EXISTS restaurantes;
 USE `restaurantes`; 
 
 CREATE TABLE `area_geografica` (
-	`codigo` INT NOT NULL,
-	`zona_postal` INT NOT NULL,
+	`codigo` INT(4) ZEROFILL NOT NULL,
+	`zona_postal` INT(3) ZEROFILL NOT NULL,
 	`distrito` VARCHAR(45) NOT NULL,
 	`concelho` VARCHAR(45) NOT NULL,
 	`freguesia` VARCHAR(45) NOT NULL);
@@ -12,7 +12,7 @@ CREATE TABLE `area_geografica` (
   
   CREATE TABLE `restaurante` (
 	`codigo` INT NOT NULL, 
-	`area_geografica` INT NOT NULL, 
+	`area_geografica` INT(4) ZEROFILL NOT NULL, 
 	`nome` VARCHAR(255) NOT NULL, 
 	`morada` VARCHAR(255) NOT NULL, 
 	`email` VARCHAR(255) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE `area_geografica` (
   CREATE TABLE `mesa` (
 	`numero` INT NOT NULL, 
 	`codigo_restaurante` INT NOT NULL, 
-	`area_restaurante` INT NOT NULL, 
+	`area_restaurante` INT(4) ZEROFILL NOT NULL, 
 	`numero_lugares` INT NOT NULL);
 
   
@@ -40,7 +40,7 @@ CREATE TABLE `area_geografica` (
   
    CREATE TABLE `recursos_restaurante` (
 	`codigo_restaurante` INT NOT NULL, 
-    `area_restaurante` INT NOT NULL, 
+    `area_restaurante` INT(4) ZEROFILL NOT NULL, 
     `id_recurso` INT NOT NULL
   ); 
   
@@ -76,7 +76,7 @@ CREATE TABLE `area_geografica` (
 	`numero` INT NOT NULL,
     `nif` INT NOT NULL UNIQUE, 
 	`morada` VARCHAR(255) NOT NULL,
-    `codigo_area_geografica` INT NOT NULL, 
+    `codigo_area_geografica` INT(4) ZEROFILL NOT NULL, 
     `data_ultima_visita` DATETIME DEFAULT NULL
   ); 
   
@@ -108,7 +108,7 @@ CREATE TABLE `area_geografica` (
    CREATE TABLE `reserva` (
 	`id` INT NOT NULL,
     `codigo_restaurante` INT NOT NULL, 
-    `area_restaurante` INT NOT NULL,
+    `area_restaurante` INT(4) ZEROFILL NOT NULL,
     `numero_cliente` INT NOT NULL,
     `numero_lugares` INT NOT NULL, 
     `data_hora_reserva` DATETIME NOT NULL,

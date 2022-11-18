@@ -440,83 +440,85 @@ INSERT INTO `ementa`(`designacao`) VALUES
 
 -- ADICIONAR ITENS DAS EMENTAS DOS RESTAURANTES
 INSERT INTO `itens_ementa` VALUES 
-	(1,1,10),
-(1,2,10),
-(2,3,3),
-(2,4,15),
-(1,5,2.5),
-(2,5,3),
-(1,6,2.5),
-(2,6,3),
+(6,35,2.5),
+(6,36,2.5),
+(6,32,10),
+(6,33,10),
+(7,34,15),
 (3,7,13),
 (3,8,13),
 (3,9,2.5),
 (3,10,2.5),
 (3,11,13),
-(3,24,2.5),
 (3,13,13),
 (3,14,3),
 (3,15,3),
-(3,16,13),
-(3,17,13),
-(1,35,2.5),
-(3,19,13),
-(3,20,3),
-(3,21,3),
-(3,22,3),
-(3,23,3),
-(1,36,2.5),
-(1,43,2.5),
-(3,26,13),
-(3,27,13),
-(3,28,3),
-(3,29,3),
-(3,30,3),
-(3,31,3),
-(1,32,10),
-(1,33,10),
-(2,34,15),
-(1,44,2.5),
-(2,35,3),
-(1,45,2.5),
-(2,36,3),
-(1,37,10),
-(3,37,13),
-(1,38,10),
-(3,38,13),
-(1,39,4),
-(2,39,5),
-(1,49,2.5),
-(2,40,15),
-(3,40,13),
-(2,41,15),
-(3,41,13),
-(2,42,15),
-(3,42,13),
-(1,50,2.5),
-(2,43,3),
-(3,43,3),
 (3,12,4.5),
-(2,44,3),
-(3,44,3),
-(3,18,4.5),
-(2,45,3),
-(3,45,3),
-(1,46,10),
-(1,47,10),
-(2,48,15),
-(3,25,4.5),
-(2,49,3),
-(3,39,4.5),
-(2,50,3);
+(4,16,13),
+(4,17,13),
+(4,19,13),
+(4,20,3),
+(4,21,3),
+(4,22,3),
+(4,23,3),
+(4,18,4.5),
+(8,43,2.5),
+(8,44,2.5),
+(8,45,2.5),
+(8,37,10),
+(8,38,10),
+(8,39,4),
+(9,40,15),
+(9,41,15),
+(9,42,15),
+(1,1,10),
+(1,2,10),
+(2,3,3),
+(2,4,15),
+(1,5,2.5),
+(1,6,2.5),
+(5,24,2.5),
+(5,26,13),
+(5,27,13),
+(5,28,3),
+(5,29,3),
+(5,30,3),
+(5,31,3),
+(5,25,4.5),
+(11,49,2.5),
+(11,50,2.5),
+(11,46,10),
+(11,47,10),
+(12,48,15);
 
 -- ADICIONAR RESERVA
+-- Reserva pendente
+INSERT INTO `reserva`(`codigo_restaurante`, `area_restaurante`, `numero_cliente`, `numero_lugares`, `data_hora_reserva`, `data_hora_marcacao`) VALUES
+	(1, 1700, 1, 8, NOW(), '2022-12-1 12:00'); 
+    
+INSERT INTO `reserva`(`codigo_restaurante`, `area_restaurante`, `numero_cliente`, `numero_lugares`, `data_hora_reserva`, `data_hora_marcacao`) VALUES
+	(2, 1100, 2, 8, NOW(), '2022-12-1 12:00'); 
+
+-- Reservas aceites
+INSERT INTO `reserva`(`codigo_restaurante`, `area_restaurante`, `numero_cliente`, `numero_lugares`, `data_hora_reserva`, `data_hora_marcacao`, `mesa`, `numero_funcionario`) VALUES
+    (3, 1100, 4, 8, NOW(), '2022-12-1 12:00', 4, 18);
+
+INSERT INTO `reserva`(`codigo_restaurante`, `area_restaurante`, `numero_cliente`, `numero_lugares`, `data_hora_reserva`, `data_hora_marcacao`, `mesa`, `numero_funcionario`) VALUES
+	(4, 1700, 3, 2, NOW(), '2022-12-1 12:00', 2, 18);
 
 
 -- ADICIONAR EMENTA_RESERVADA
-
+INSERT INTO `ementa_reservada`(`id_reserva`, `codigo_ementa`, `numero_item`) VALUES 
+	(1, 1, 5), (1, 1, 1), (1, 1, 39), 
+    (2, 3, 8), (2, 3, 9), (2, 3, 12), (2, 3, 15), 
+    (3, 4, 18), (3, 4, 19), (3, 4, 20),
+    (4, 5, 25), (4, 5, 27), (4, 5, 28), (4, 5, 24);
 
 -- ADICIONAR CARACTERISTICAS_RESERVA
-
+INSERT INTO `caracteristicas_reserva` VALUES 
+	(1, 1), (2, 3), (4, 4);
 
 -- ADICIONAR ITENS_PREFERIDOS_CLIENTE
+INSERT INTO `itens_preferidos_cliente` VALUES
+	(3, 18), (2, 19), 
+	(4, 27);
