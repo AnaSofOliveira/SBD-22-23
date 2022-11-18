@@ -54,6 +54,7 @@ DROP TABLE `reserva`;
 DROP TABLE `ementa_reservada`; 
 DROP TABLE `caracteristicas_reserva`; 
 DROP TABLE `itens_preferidos_cliente`; 
+DROP TABLE `horario_ementas_restaurante`;
 
 
 -- DROP DATABASE
