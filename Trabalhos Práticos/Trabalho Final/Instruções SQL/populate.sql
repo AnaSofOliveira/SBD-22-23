@@ -8,7 +8,7 @@ INSERT INTO area_geografica (codigoPostal, zonaPostal, freguesia, concelho, dist
     (1100, 001, 'Lisboa', 'Lisboa', 'Lisboa'), (1100, 002, 'Lisboa', 'Lisboa', 'Lisboa'); 
     
 -- ADICIONAR MORADAS
-insert into morada(codigoPostal, zonaPostal, designacao) values 
+insert into morada (codigoPostal, zonaPostal, designacao) values 
 	(1700, 001, 'Rua de Entrecampos'), 
     (1100, 001, 'Rua dos Correeiros 204'), 
     (1100, 001, 'Paça da Figueira 17'), 
