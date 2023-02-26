@@ -38,10 +38,6 @@ ALTER TABLE caracteristicas_mesa DROP FOREIGN KEY fk_caracteristicasMesa_restaur
 -- MESA
 ALTER TABLE mesa DROP FOREIGN KEY fk_mesa_restaurante;
 
--- RECURSO_ITEM
-ALTER TABLE recurso_item DROP FOREIGN KEY fk_recursoItem_item;
-ALTER TABLE recurso_item DROP FOREIGN KEY fk_recurosItem_recurso;
-
 -- ITEM_EMENTA
 ALTER TABLE item_ementa DROP FOREIGN KEY fk_itemEmenta_item;
 ALTER TABLE item_ementa DROP FOREIGN KEY fk_itemEmenta_ementa;
@@ -76,7 +72,6 @@ drop table utilizador;
 drop table caracteristicas_mesa;
 drop table caracteristica;
 drop table mesa; 
-drop table recurso_item;
 drop table item_ementa;
 drop table item;
 drop table horario;
