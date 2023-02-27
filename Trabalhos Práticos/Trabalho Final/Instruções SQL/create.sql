@@ -25,12 +25,12 @@ create table if not exists recurso_multimedia (
 
 create table if not exists restaurante (
 	codigo int not null,
-    codigoMorada int not null, 
-    codigoArea int not null, 
-    zonaArea int not null, 
     nome varchar(50) not null, 
     email varchar(50) not null, 
-    telefone int not null
+    telefone int not null,
+    codigoMorada int not null, 
+    codigoArea int not null, 
+    zonaArea int not null
 );
 
 create table if not exists recursos_restaurante (
@@ -94,7 +94,7 @@ create table if not exists utilizador (
 create table if not exists cliente (
 	numero int not null, 
     nif int not null, 
-    dataUltimaVisita datetime not null, 
+    dataUltimaVisita datetime, 
     codigoMorada int not null, 
     codigoArea int not null, 
     zonaArea int not null
@@ -125,7 +125,8 @@ create table if not exists caracteristicas_reserva (
 create table if not exists item_reserva (
 	numeroReserva int not null, 
     codigoRestaurante int not null, 
-    idItem int not null
+    idItem int not null, 
+    quantidade int not null
 );
 
 create table if not exists reservas_atribuidas (
