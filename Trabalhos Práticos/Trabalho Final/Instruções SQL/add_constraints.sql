@@ -62,7 +62,7 @@ alter table reserva modify numero int not null auto_increment;
 alter table caracteristicas_reserva add constraint pk_caracteristicasReserva primary key(numeroReserva, codigoRestaurante, numeroCaracteristica); 
 
 -- ITEM_RESERVA
-alter table item_reserva add constraint pk_itemReserva primary key(numeroReserva, idItem);
+alter table item_reserva add constraint pk_itemReserva primary key(numeroReserva, codigoRestaurante, idItem);
 
 -- RESERVAS_ATRIBUIDAS
 alter table reservas_atribuidas add constraint pk_reservasAtribuidas primary key(numeroReserva, numeroFuncionario); 
