@@ -418,20 +418,11 @@ insert into caracteristicas_reserva (numeroReserva, codigoRestaurante, numeroCar
 
 
 -- ADICIONAR RESERVA ATRIBUIDAS
-insert into 
+insert into reservas_atribuidas (numeroReserva, codigoRestaurante, numeroFuncionario, numeroMesa, estado, dataHora) values 
+	(1, 1, 8, 3, 'aceite', now()), 
+    (2, 2, 16, 4, 'aceite', now()), 
+    (3, 3, 24, null, 'recusado', now()), 
+    (4, 4, 11, null, 'recusado', now());
     
-select * from caracteristica;
-    
-select * from horario where diaSemana='Sex';
-select * from ementa;
-select * from item_reserva;
-
-select r.nome, e.designacao, i.id, i.designacao, i.tipo, ie.preco
-from item_ementa as ie
-	inner join item as i on ie.idItem = i.id
-    inner join ementa as e on ie.idEmenta = e.id
-    inner join restaurante as r on ie.codigoRestaurante = r.codigo
-where idEmenta=4;
-
 
 
