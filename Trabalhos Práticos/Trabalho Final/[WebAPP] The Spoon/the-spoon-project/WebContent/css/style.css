@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+
+html{
+	color: #000;
+}
+
+body{
+	background-color: #2E5266 !important;
+}
+
+.restaurant-list{
+	background: aqua;
+	
+}
