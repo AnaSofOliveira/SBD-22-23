@@ -48,5 +48,4 @@ public class Morada {
 		return "Morada [codigo=" + codigo + ", areaGeografica=" + areaGeografica + ", designacao=" + designacao + "]";
 	}
 
-
 }

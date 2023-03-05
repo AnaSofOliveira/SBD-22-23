@@ -1,8 +1,7 @@
 package theSpoon.model.dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import theSpoon.model.beans.Restaurante;
 
 public interface DAO<E> {
 	
@@ -10,12 +9,11 @@ public interface DAO<E> {
 	
 	public boolean update(E t);
 	
-	public E get(Object id);
+	public E get(int id);
 	
-	public boolean delete(Object id);
+	public boolean delete(int id);
 	
-	public List<E> listAll();
+	public ArrayList<E> listAll();
 	
-	public long count();
 }
 	
