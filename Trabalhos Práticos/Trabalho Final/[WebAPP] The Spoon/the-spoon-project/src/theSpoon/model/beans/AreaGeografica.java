@@ -7,7 +7,7 @@ public class AreaGeografica {
 	private String freguesia;
 	private String concelho;
 	private String distrito;
-	
+
 	public AreaGeografica(int codigoPostal, int zonaPostal, String freguesia, String concelho, String distrito) {
 		super();
 		this.codigoPostal = codigoPostal;

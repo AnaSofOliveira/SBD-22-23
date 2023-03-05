@@ -2,19 +2,30 @@ package theSpoon.model.beans;
 
 public class Funcionario extends Utilizador {
 
+	private int numero;
 	private Funcionario chefe;
 	private Restaurante restaurante;
 
-	public Funcionario(int nif, String nomeProprio, String apelido, int idade, Restaurante restaurante) {
+	public Funcionario(int numero, int nif, String nomeProprio, String apelido, int idade, Restaurante restaurante) {
 		super(nif, nomeProprio, apelido, idade);
+		this.numero = numero;
 		this.restaurante = restaurante;
 	}
 
-	public Funcionario(int nif, String nomeProprio, String apelido, int idade, Funcionario chefe,
+	public Funcionario(int numero, int nif, String nomeProprio, String apelido, int idade, Funcionario chefe,
 			Restaurante restaurante) {
 		super(nif, nomeProprio, apelido, idade);
+		this.numero = numero;
 		this.chefe = chefe;
 		this.restaurante = restaurante;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 
 	public Funcionario getChefe() {
@@ -35,8 +46,7 @@ public class Funcionario extends Utilizador {
 
 	@Override
 	public String toString() {
-		return "Funcionario [nif=" + super.getNif() + "," + " nomeProprio=" + super.getNomeProprio() + "," + " apelido="
-				+ super.getApelido() + "," + " idade=" + super.getIdade() + "," + " chefe=" + chefe + ", restaurante="
-				+ restaurante + "]";
+		return "Funcionario [numero=" + numero + ", chefe=" + chefe + ", restaurante=" + restaurante + "]";
 	}
+
 }
