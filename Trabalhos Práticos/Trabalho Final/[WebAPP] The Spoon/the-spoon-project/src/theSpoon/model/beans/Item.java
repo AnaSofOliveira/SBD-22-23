@@ -6,15 +6,15 @@ public class Item {
 	private String desginacao;
 	private String descricao;
 	private TipoItem tipo;
-	private Recurso recurso;
+	private int idRecurso;
 
-	public Item(int id, String desginacao, String descricao, TipoItem tipo, Recurso recurso) {
+	public Item(int id, String desginacao, String descricao, TipoItem tipo, int idRecurso) {
 		super();
 		this.id = id;
 		this.desginacao = desginacao;
 		this.descricao = descricao;
 		this.tipo = tipo;
-		this.recurso = recurso;
+		this.idRecurso = idRecurso;
 	}
 
 	public int getId() {
@@ -49,18 +49,18 @@ public class Item {
 		this.tipo = tipo;
 	}
 
-	public Recurso getRecurso() {
-		return recurso;
+	public int getRecurso() {
+		return idRecurso;
 	}
 
-	public void setRecurso(Recurso recurso) {
-		this.recurso = recurso;
+	public void setRecurso(int idRecurso) {
+		this.idRecurso = idRecurso;
 	}
 
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", desginacao=" + desginacao + ", descricao=" + descricao + ", tipo=" + tipo
-				+ ", recurso=" + recurso + "]";
+				+ ", recurso=" + idRecurso + "]";
 	}
 
 	// TODO - Constructors Item

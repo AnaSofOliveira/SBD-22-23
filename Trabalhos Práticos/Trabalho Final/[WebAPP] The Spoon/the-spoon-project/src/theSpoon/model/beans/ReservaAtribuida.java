@@ -4,44 +4,54 @@ import java.util.Date;
 
 public class ReservaAtribuida {
 
-	private Reserva reserva;
-	private Funcionario funcionario;
-	private Mesa mesa;
+	private int numeroReserva;
+	private int codigoRestaurante;
+	private int numeroFuncionario;
+	private int numeroMesa;
 	private EstadoReserva estado;
 	private Date dataAlteracaoEstado;
 
-	public ReservaAtribuida(Reserva reserva, Funcionario funcionario, Mesa mesa, EstadoReserva estado,
-			Date dataAlteracaoEstado) {
+	public ReservaAtribuida(int numeroReserva, int codigoRestaurante, int numeroFuncionario, int numeroMesa,
+			EstadoReserva estado, Date dataAlteracaoEstado) {
 		super();
-		this.reserva = reserva;
-		this.funcionario = funcionario;
-		this.mesa = mesa;
+		this.numeroReserva = numeroReserva;
+		this.codigoRestaurante = codigoRestaurante;
+		this.numeroFuncionario = numeroFuncionario;
+		this.numeroMesa = numeroMesa;
 		this.estado = estado;
 		this.dataAlteracaoEstado = dataAlteracaoEstado;
 	}
 
-	public Reserva getReserva() {
-		return reserva;
+	public int getNumeroReserva() {
+		return numeroReserva;
 	}
 
-	public void setReserva(Reserva reserva) {
-		this.reserva = reserva;
+	public void setNumeroReserva(int numeroReserva) {
+		this.numeroReserva = numeroReserva;
 	}
 
-	public Funcionario getFuncionario() {
-		return funcionario;
+	public int getCodigoRestaurante() {
+		return codigoRestaurante;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+	public void setCodigoRestaurante(int codigoRestaurante) {
+		this.codigoRestaurante = codigoRestaurante;
 	}
 
-	public Mesa getMesa() {
-		return mesa;
+	public int getNumeroFuncionario() {
+		return numeroFuncionario;
 	}
 
-	public void setMesa(Mesa mesa) {
-		this.mesa = mesa;
+	public void setNumeroFuncionario(int numeroFuncionario) {
+		this.numeroFuncionario = numeroFuncionario;
+	}
+
+	public int getNumeroMesa() {
+		return numeroMesa;
+	}
+
+	public void setNumeroMesa(int numeroMesa) {
+		this.numeroMesa = numeroMesa;
 	}
 
 	public EstadoReserva getEstado() {
@@ -62,11 +72,9 @@ public class ReservaAtribuida {
 
 	@Override
 	public String toString() {
-		return "ReservaAtribuida [reserva=" + reserva + ", funcionario=" + funcionario + ", mesa=" + mesa + ", estado="
-				+ estado + ", dataAlteracaoEstado=" + dataAlteracaoEstado + "]";
+		return "ReservaAtribuida [numeroReserva=" + numeroReserva + ", codigoRestaurante=" + codigoRestaurante
+				+ ", numeroFuncionario=" + numeroFuncionario + ", numeroMesa=" + numeroMesa + ", estado=" + estado
+				+ ", dataAlteracaoEstado=" + dataAlteracaoEstado + "]";
 	}
 
-	// TODO - Constructors ReservaAtribuida
-	// TODO - Getters and Setters ReservaAtribuida
-	// TODO - toString ReservaAtribuida
 }
