@@ -5,23 +5,15 @@ import java.util.ArrayList;
 public class Mesa {
 
 	private int numero;
-	private Restaurante restaurante;
+	private int codigoRestaurante;
 	private int lotacao;
-	private ArrayList<Caracteristica> caracteristicas;
+	/* private ArrayList<Caracteristica> caracteristicas; */
 
-	public Mesa(int numero, Restaurante restaurante, int lotacao) {
+	public Mesa(int numero, int codigoRestaurante, int lotacao) {
 		super();
 		this.numero = numero;
-		this.restaurante = restaurante;
+		this.codigoRestaurante = codigoRestaurante;
 		this.lotacao = lotacao;
-	}
-
-	public Mesa(int numero, Restaurante restaurante, int lotacao, ArrayList<Caracteristica> caracteristicas) {
-		super();
-		this.numero = numero;
-		this.restaurante = restaurante;
-		this.lotacao = lotacao;
-		this.caracteristicas = caracteristicas;
 	}
 
 	public int getNumero() {
@@ -48,18 +40,18 @@ public class Mesa {
 		this.lotacao = lotacao;
 	}
 
-	public ArrayList<Caracteristica> getCaracteristicas() {
-		return caracteristicas;
-	}
-
-	public void setCaracteristicas(ArrayList<Caracteristica> caracteristicas) {
-		this.caracteristicas = caracteristicas;
-	}
+	/*
+	 * public ArrayList<Caracteristica> getCaracteristicas() { return
+	 * caracteristicas; }
+	 * 
+	 * public void setCaracteristicas(ArrayList<Caracteristica> caracteristicas) {
+	 * this.caracteristicas = caracteristicas; }
+	 */
 
 	@Override
 	public String toString() {
 		return "Mesa [numero=" + numero + ", codigoRestaurante=" + codigoRestaurante + ", lotacao=" + lotacao
-				+ ", caracteristicas=" + caracteristicas + "]";
+				+ "]";
 	}
 
 	// TODO - Constructors Mesa

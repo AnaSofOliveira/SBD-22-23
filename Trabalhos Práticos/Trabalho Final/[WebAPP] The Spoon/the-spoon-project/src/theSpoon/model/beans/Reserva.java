@@ -6,36 +6,39 @@ import java.util.Date;
 public class Reserva {
 
 	private int numero;
-	private Restaurante restaurante;
+	private int codigoRestaurante;
 	private Date dataMarcacao;
-	private Cliente cliente;
+	private int numeroCliente;
 	private int nroPessoas;
 	private Date dataPedidoReserva;
-	private ArrayList<Caracteristica> caracteristicas;
-	private ArrayList<Item> itens;
+	/*
+	 * private ArrayList<Caracteristica> caracteristicas; private ArrayList<Item>
+	 * itens;
+	 */
 
-	public Reserva(int numero, Restaurante restaurante, Date dataMarcacao, Cliente cliente, int nroPessoas,
+	public Reserva(int numero, int codigoRestaurante, Date dataMarcacao, int numeroCliente, int nroPessoas,
 			Date dataPedidoReserva) {
 		super();
 		this.numero = numero;
-		this.restaurante = restaurante;
+		this.codigoRestaurante = codigoRestaurante;
 		this.dataMarcacao = dataMarcacao;
-		this.cliente = cliente;
+		this.numeroCliente = numeroCliente;
 		this.nroPessoas = nroPessoas;
 		this.dataPedidoReserva = dataPedidoReserva;
 	}
 
-	public Reserva(int numero, Restaurante restaurante, Date dataMarcacao, Cliente cliente, int nroPessoas,
+	public Reserva(int numero, int codigoRestaurante, Date dataMarcacao, int numeroCliente, int nroPessoas,
 			Date dataPedidoReserva, ArrayList<Caracteristica> caracteristicas, ArrayList<Item> itens) {
 		super();
 		this.numero = numero;
-		this.restaurante = restaurante;
+		this.codigoRestaurante = codigoRestaurante;
 		this.dataMarcacao = dataMarcacao;
-		this.cliente = cliente;
+		this.numeroCliente = numeroCliente;
 		this.nroPessoas = nroPessoas;
 		this.dataPedidoReserva = dataPedidoReserva;
-		this.caracteristicas = caracteristicas;
-		this.itens = itens;
+		/*
+		 * this.caracteristicas = caracteristicas; this.itens = itens;
+		 */
 	}
 
 	public int getNumero() {
@@ -46,12 +49,12 @@ public class Reserva {
 		this.numero = numero;
 	}
 
-	public Restaurante getRestaurante() {
-		return restaurante;
+	public int getRestaurante() {
+		return codigoRestaurante;
 	}
 
-	public void setRestaurante(Restaurante restaurante) {
-		this.restaurante = restaurante;
+	public void setRestaurante(int codigoRestaurante) {
+		this.codigoRestaurante = codigoRestaurante;
 	}
 
 	public Date getDataMarcacao() {
@@ -62,12 +65,12 @@ public class Reserva {
 		this.dataMarcacao = dataMarcacao;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public int getCliente() {
+		return numeroCliente;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setCliente(int numeroCliente) {
+		this.numeroCliente = numeroCliente;
 	}
 
 	public int getNroPessoas() {
@@ -86,27 +89,23 @@ public class Reserva {
 		this.dataPedidoReserva = dataPedidoReserva;
 	}
 
-	public ArrayList<Caracteristica> getCaracteristicas() {
-		return caracteristicas;
-	}
-
-	public void setCaracteristicas(ArrayList<Caracteristica> caracteristicas) {
-		this.caracteristicas = caracteristicas;
-	}
-
-	public ArrayList<Item> getItens() {
-		return itens;
-	}
-
-	public void setItens(ArrayList<Item> itens) {
-		this.itens = itens;
-	}
+	/*
+	 * public ArrayList<Caracteristica> getCaracteristicas() { return
+	 * caracteristicas; }
+	 * 
+	 * public void setCaracteristicas(ArrayList<Caracteristica> caracteristicas) {
+	 * this.caracteristicas = caracteristicas; }
+	 * 
+	 * public ArrayList<Item> getItens() { return itens; }
+	 * 
+	 * public void setItens(ArrayList<Item> itens) { this.itens = itens; }
+	 */
 
 	@Override
 	public String toString() {
-		return "Reserva [numero=" + numero + ", restaurante=" + restaurante + ", dataMarcacao=" + dataMarcacao
-				+ ", cliente=" + cliente + ", nroPessoas=" + nroPessoas + ", dataPedidoReserva=" + dataPedidoReserva
-				+ ", caracteristicas=" + caracteristicas + ", itens=" + itens + "]";
+		return "Reserva [numero=" + numero + ", restaurante=" + codigoRestaurante + ", dataMarcacao=" + dataMarcacao
+				+ ", cliente=" + numeroCliente + ", nroPessoas=" + nroPessoas + ", dataPedidoReserva=" + dataPedidoReserva
+				+ "]";
 	}
 
 	// TODO - Constructors Reserva

@@ -34,8 +34,8 @@ public class FuncionarioDAO implements DAO<Funcionario>{
 				stmt.executeUpdate(insertUtilizador);
 
 				String insertFuncionario = "INSERT INTO funcionario (nif, chefe, codigoRestaurante) VALUES ("
-						+ t.getNif() + "," + ((t.getChefe() == null) ? "NULL" : t.getChefe().getNumero())
-						+ "," + t.getRestaurante().getCodigo() + ");";
+						+ t.getNif() + "," + ((t.getNumeroFuncionarioChefe() == -1) ? "NULL" : t.getNumeroFuncionarioChefe())
+						+ "," + t.getCodigoRestaurante() + ");";
 
 				System.out.println("-> Instrução SQL: " + insertFuncionario);
 				stmt.executeUpdate(insertFuncionario);
@@ -71,11 +71,10 @@ public class FuncionarioDAO implements DAO<Funcionario>{
 
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-				String updateFuncionario = "UPDATE funcionario SET " + "numero ='"
-						+ t.getNumero() + "', nif = "
-						+ t.getNif() + ", chefe ="
-						+ ((t.getChefe() == null) ? "NULL" : t.getChefe().getNumero()) + ", codigoRestaurante ="
-						+ t.getRestaurante().getCodigo() + ";";
+				String updateFuncionario = "UPDATE funcionario SET " 
+											+ "chefe =" + ((t.getNumeroFuncionarioChefe() == -1) ? "NULL" : t.getNumeroFuncionarioChefe()) 
+											+ ", codigoRestaurante =" + t.getCodigoRestaurante() + " WHERE nif = " + t.getNif()
+											+ ";";
 
 				System.out.println("-> Instrução SQL: " + updateFuncionario);
 				stmt.executeUpdate(updateFuncionario);
@@ -102,60 +101,24 @@ public class FuncionarioDAO implements DAO<Funcionario>{
 		try {
 
 			try (Statement stmt = connection.createStatement()) {
-				String getFuncionario = "select f.numero as numero, u.nif as nif, u.nomeProprio as nomeProprio, u.apelido as apelido, u.idade as idade, r.codigo as codigoRest, r.nome as nomeRest, r.email as emailRest, r.telefone as telefoneRest, f.chefe as chefe, m.codigo as codigoMorada, m.designacao as desigMorada, a.codigoPostal as codigoPostal, a.zonaPostal as zonaPostal, a.freguesia as freguesia, a.concelho as concelho, a.distrito as distrito"
+				String getFuncionario = "select u.nif as nif, u.nomeProprio as nomeProprio, u.apelido as apelido, "
+						+ "u.idade as idade, f.numero as numero, f.chefe as numeroFuncionarioChefe, f.codigoRestaurante as codigoRestaurante "
 						+ " from funcionario as f" + 
-						" inner join utilizador as u on f.nif = u.nif" + 
-						" inner join funcionario as chefe on f.chefe = chefe.numero" + 
-						" inner join restaurante as r on f.codigoRestaurante = r.codigo" + 
-						" inner join morada as m on r.codigoMorada = m.codigo" + 
-						" inner join area_geografica as a on r.codigoArea = a.codigoPostal and r.zonaArea = a.zonaPostal " + 
+						" inner join utilizador as u on f.nif = u.nif " + 
 						"where f.nif = " + id + ";";
 
 				System.out.println("-> Instrução SQL: " + getFuncionario);
 				ResultSet result = stmt.executeQuery(getFuncionario);
 				
-				
 				while (result.next()) {
 					funcionario = new Funcionario(
-										result.getInt("numero"),
-										result.getInt("nif"), 
-										result.getString("nomeProprio"), 
-										result.getString("apelido"), 
-										result.getInt("idade"),
-										new Restaurante(
-												result.getInt("codigoRest"),
-												result.getString("nomeRest"),
-												result.getString("emailRest"),
-												result.getInt("telefone"),
-												new Morada(
-														new AreaGeografica(
-																result.getInt("codigoPostal"),
-																result.getInt("zonaPostal"),
-																result.getString("freguesia"), 
-																result.getString("concelho"), 
-																result.getString("distrito")
-														), 
-														result.getString("desigMorada")
-												)
-										));
-					int codigoChefe = result.getInt("chefe");
-					
-					String getChefe = "select * from funcionario as f" + 
-							"	inner join utilizador as u on f.nif = u.nif" + 
-							"where f.numero = "+ codigoChefe +"; ";
-
-					System.out.println("-> Instrução SQL: " + getChefe);
-					result = stmt.executeQuery(getChefe);
-					
-					while(result.next()) {
-						funcionario.setChefe(new Funcionario(
-								result.getInt("numero"), 
-								result.getInt("nif"), 
-								result.getString("nomeProprio"),
-								result.getString("apelido"), 
-								result.getInt("idade"),
-								funcionario.getRestaurante()));
-					}			
+							result.getInt("nif"), 
+							result.getString("nomeProprio"), 
+							result.getString("apelido"),
+							result.getInt("idade"),
+							result.getInt("numero"),
+							(result.getInt("numeroFuncionarioChefe") == 0? -1 : result.getInt("numeroFuncionarioChefe")),
+							result.getInt("codigoRestaurante"));			
 				}
 				System.out.println("Commited");
 				
@@ -201,9 +164,64 @@ public class FuncionarioDAO implements DAO<Funcionario>{
 
 	@Override
 	public ArrayList<Funcionario> listAll() {
-		// TODO Auto-generated method stub
-		TERMINAR MÉTODO
-		return null;
+		System.out.println("FuncionarioDAO -> Start listAll");
+		ArrayList<Funcionario> funcionarios = new ArrayList<>(); 
+		
+		try {
+
+			try (Statement stmt = connection.createStatement()) {
+				String getFuncionarios = "select u.nif as nif, u.nomeProprio as nomeProprio, u.apelido as apelido, "
+						+ "u.idade as idade, f.numero as numero, f.chefe as numeroFuncionarioChefe, f.codigoRestaurante as codigoRestaurante "
+						+ " from funcionario as f" + 
+						" inner join utilizador as u on f.nif = u.nif;";
+				
+				System.out.println("-> Instrução SQL: " + getFuncionarios);
+				ResultSet result = stmt.executeQuery(getFuncionarios);
+				
+				Funcionario funcionario = null;
+				while (result.next()) {
+					funcionario = new Funcionario(
+							result.getInt("nif"), 
+							result.getString("nomeProprio"), 
+							result.getString("apelido"),
+							result.getInt("idade"),
+							result.getInt("numero"),
+							(result.getInt("numeroFuncionarioChefe") == 0? -1 : result.getInt("numeroFuncionarioChefe")),
+							result.getInt("codigoRestaurante"));
+					
+					funcionarios.add(funcionario);
+				}
+				System.out.println("Commited");
+				
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}finally {
+			return funcionarios;
+		}
+	}
+	
+	public static void main(String[] args) {
+		Funcionario funcionario = new Funcionario(234503025, "Ana", "Oliveira", 28, 3, 3);
+		FuncionarioDAO funcionarioDAO = new FuncionarioDAO(); 
+		
+//		funcionarioDAO.create(funcionario);
+//
+//		funcionario.setApelido("Preto");
+//		funcionario.setIdade(53);
+//		funcionario.setCodigoRestaurante(3);
+//
+//		funcionarioDAO.update(funcionario);
+//		
+//		System.out.println(funcionarioDAO.get(108257681));
+//		
+//		System.out.println(funcionarioDAO.delete(234503025));
+		
+		ArrayList<Funcionario> funcionarios = funcionarioDAO.listAll();
+		System.out.println(funcionarios);
+		for (int i = 0; i < funcionarios.size() ; i++) {
+			System.out.println(funcionarios.get(i));
+		}
 	}
 
 }

@@ -3,21 +3,22 @@ package theSpoon.model.beans;
 public class Funcionario extends Utilizador {
 
 	private int numero;
-	private Funcionario chefe;
-	private Restaurante restaurante;
+	private int numeroFuncionarioChefe = -1;
+	private int codigoRestaurante;
 
-	public Funcionario(int numero, int nif, String nomeProprio, String apelido, int idade, Restaurante restaurante) {
+	public Funcionario(int nif, String nomeProprio, String apelido, int idade, int numeroFuncionarioChefe,
+			int codigoRestaurante) {
 		super(nif, nomeProprio, apelido, idade);
-		this.numero = numero;
-		this.restaurante = restaurante;
+		this.numeroFuncionarioChefe = numeroFuncionarioChefe;
+		this.codigoRestaurante = codigoRestaurante;
 	}
 
-	public Funcionario(int numero, int nif, String nomeProprio, String apelido, int idade, Funcionario chefe,
-			Restaurante restaurante) {
+	public Funcionario(int nif, String nomeProprio, String apelido, int idade, int numero, int numeroFuncionarioChefe,
+			int codigoRestaurante) {
 		super(nif, nomeProprio, apelido, idade);
 		this.numero = numero;
-		this.chefe = chefe;
-		this.restaurante = restaurante;
+		this.numeroFuncionarioChefe = numeroFuncionarioChefe;
+		this.codigoRestaurante = codigoRestaurante;
 	}
 
 	public int getNumero() {
@@ -28,25 +29,26 @@ public class Funcionario extends Utilizador {
 		this.numero = numero;
 	}
 
-	public Funcionario getChefe() {
-		return chefe;
+	public int getNumeroFuncionarioChefe() {
+		return numeroFuncionarioChefe;
 	}
 
-	public void setChefe(Funcionario chefe) {
-		this.chefe = chefe;
+	public void setNumeroFuncionarioChefe(int numeroFuncionarioChefe) {
+		this.numeroFuncionarioChefe = numeroFuncionarioChefe;
 	}
 
-	public Restaurante getRestaurante() {
-		return restaurante;
+	public int getCodigoRestaurante() {
+		return codigoRestaurante;
 	}
 
-	public void setRestaurante(Restaurante restaurante) {
-		this.restaurante = restaurante;
+	public void setCodigoRestaurante(int codigoRestaurante) {
+		this.codigoRestaurante = codigoRestaurante;
 	}
 
 	@Override
 	public String toString() {
-		return "Funcionario [numero=" + numero + ", chefe=" + chefe + ", restaurante=" + restaurante + "]";
+		return "Funcionario [numero=" + numero + ", numeroFuncionarioChefe=" + numeroFuncionarioChefe
+				+ ", codigoRestaurante=" + codigoRestaurante + "]";
 	}
 
 }

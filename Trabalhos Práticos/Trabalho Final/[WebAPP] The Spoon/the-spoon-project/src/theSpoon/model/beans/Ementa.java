@@ -3,21 +3,26 @@ package theSpoon.model.beans;
 import java.util.ArrayList;
 
 public class Ementa {
-	
+
 	private int id;
-	private Restaurante restaurante;
+	private int codigoRestaurante;
 	private String designacao;
 	private ArrayList<Item> itens;
-	
-	public Ementa(int id, Restaurante restaurante, String designacao, ArrayList<Item> itens) {
+
+	public Ementa(int id, int codigoRestaurante, String designacao) {
 		super();
 		this.id = id;
-		this.restaurante = restaurante;
+		this.codigoRestaurante = codigoRestaurante;
+		this.designacao = designacao;
+	}
+
+	public Ementa(int id, int codigoRestaurante, String designacao, ArrayList<Item> itens) {
+		super();
+		this.id = id;
+		this.codigoRestaurante = codigoRestaurante;
 		this.designacao = designacao;
 		this.itens = itens;
 	}
-
-	
 
 	public int getId() {
 		return id;
@@ -27,12 +32,12 @@ public class Ementa {
 		this.id = id;
 	}
 
-	public Restaurante getRestaurante() {
-		return restaurante;
+	public int getCodigoRestaurante() {
+		return codigoRestaurante;
 	}
 
-	public void setRestaurante(Restaurante restaurante) {
-		this.restaurante = restaurante;
+	public void setCodigoRestaurante(int codigoRestaurante) {
+		this.codigoRestaurante = codigoRestaurante;
 	}
 
 	public String getDesignacao() {
@@ -53,7 +58,8 @@ public class Ementa {
 
 	@Override
 	public String toString() {
-		return "Ementa [id=" + id + ", restaurante=" + restaurante + ", designacao=" + designacao + ", itens=" + itens + "]";
+		return "Ementa [id=" + id + ", codigoRestaurante=" + codigoRestaurante + ", designacao=" + designacao
+				+ ", itens=" + itens + "]";
 	}
 
 }

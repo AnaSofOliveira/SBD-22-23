@@ -3,19 +3,15 @@ package theSpoon.model.beans;
 public class Morada {
 
 	private int codigo;
-	private AreaGeografica areaGeografica;
+	private int codigoPostal;
+	private int zonaPostal;
 	private String designacao;
 
-	public Morada(AreaGeografica areaGeografica, String designacao) {
-		super();
-		this.areaGeografica = areaGeografica;
-		this.designacao = designacao;
-	}
-
-	public Morada(int codigo, AreaGeografica areaGeografica, String designacao) {
+	public Morada(int codigo, int codigoPostal, int zonaPostal, String designacao) {
 		super();
 		this.codigo = codigo;
-		this.areaGeografica = areaGeografica;
+		this.codigoPostal = codigoPostal;
+		this.zonaPostal = zonaPostal;
 		this.designacao = designacao;
 	}
 
@@ -27,12 +23,20 @@ public class Morada {
 		this.codigo = codigo;
 	}
 
-	public AreaGeografica getAreaGeografica() {
-		return areaGeografica;
+	public int getCodigoPostal() {
+		return codigoPostal;
 	}
 
-	public void setAreaGeografica(AreaGeografica areaGeografica) {
-		this.areaGeografica = areaGeografica;
+	public void setCodigoPostal(int codigoPostal) {
+		this.codigoPostal = codigoPostal;
+	}
+
+	public int getZonaPostal() {
+		return zonaPostal;
+	}
+
+	public void setZonaPostal(int zonaPostal) {
+		this.zonaPostal = zonaPostal;
 	}
 
 	public String getDesignacao() {
@@ -45,7 +49,8 @@ public class Morada {
 
 	@Override
 	public String toString() {
-		return "Morada [codigo=" + codigo + ", areaGeografica=" + areaGeografica + ", designacao=" + designacao + "]";
+		return "Morada [codigo=" + codigo + ", codigoPostal=" + codigoPostal + ", zonaPostal=" + zonaPostal
+				+ ", designacao=" + designacao + "]";
 	}
 
 }

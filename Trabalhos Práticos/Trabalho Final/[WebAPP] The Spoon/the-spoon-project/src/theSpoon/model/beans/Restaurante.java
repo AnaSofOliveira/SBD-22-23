@@ -8,34 +8,31 @@ public class Restaurante {
 	private String nome;
 	private String email;
 	private int telefone;
-	private Morada morada;
-	private ArrayList<Mesa> mesas;
-	private ArrayList<Ementa> ementas;
-	private ArrayList<Recurso> recursos;
-	private ArrayList<Horario> horarios;
-	
-	
-	public Restaurante(int codigo, String nome, String email, int telefone, Morada morada) {
-		super();
-		this.codigo = codigo;
-		this.nome = nome;
-		this.email = email;
-		this.telefone = telefone;
-		this.morada = morada;
-	}
+	private int codigoMorada;
+	private int codigoArea;
+	private int zonaArea;
 
-	public Restaurante(int codigo, String nome, String email, int telefone, Morada morada, ArrayList<Mesa> mesas,
-			ArrayList<Ementa> ementas, ArrayList<Recurso> recursos, ArrayList<Horario> horarios) {
+	public Restaurante(String nome, String email, int telefone, int codigoMorada, int codigoArea,
+			int zonaArea) {
+		super();
+		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+		this.codigoMorada = codigoMorada;
+		this.codigoArea = codigoArea;
+		this.zonaArea = zonaArea;
+	}
+	
+	public Restaurante(int codigo, String nome, String email, int telefone, int codigoMorada, int codigoArea,
+			int zonaArea) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
-		this.morada = morada;
-		this.mesas = mesas;
-		this.ementas = ementas;
-		this.recursos = recursos;
-		this.horarios = horarios;
+		this.codigoMorada = codigoMorada;
+		this.codigoArea = codigoArea;
+		this.zonaArea = zonaArea;
 	}
 
 	public int getCodigo() {
@@ -70,55 +67,34 @@ public class Restaurante {
 		this.telefone = telefone;
 	}
 
-	public Morada getMorada() {
-		return morada;
+	public int getCodigoMorada() {
+		return codigoMorada;
 	}
 
-	public void setMorada(Morada morada) {
-		this.morada = morada;
+	public void setCodigoMorada(int codigoMorada) {
+		this.codigoMorada = codigoMorada;
 	}
 
-	public ArrayList<Mesa> getMesas() {
-		return mesas;
+	public int getCodigoArea() {
+		return codigoArea;
 	}
 
-	public void setMesas(ArrayList<Mesa> mesas) {
-		this.mesas = mesas;
+	public void setCodigoArea(int codigoArea) {
+		this.codigoArea = codigoArea;
 	}
 
-	public ArrayList<Ementa> getEmentas() {
-		return ementas;
+	public int getZonaArea() {
+		return zonaArea;
 	}
 
-	public void setEmentas(ArrayList<Ementa> ementas) {
-		this.ementas = ementas;
-	}
-
-	public ArrayList<Recurso> getRecursos() {
-		return recursos;
-	}
-
-	public void setRecursos(ArrayList<Recurso> recursos) {
-		this.recursos = recursos;
-	}
-
-	public ArrayList<Horario> getHorarios() {
-		return horarios;
-	}
-
-	public void setHorarios(ArrayList<Horario> horarios) {
-		this.horarios = horarios;
+	public void setZonaArea(int zonaArea) {
+		this.zonaArea = zonaArea;
 	}
 
 	@Override
 	public String toString() {
 		return "Restaurante [codigo=" + codigo + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone
-				+ ", morada=" + morada + ", mesas=" + mesas + ", ementas=" + ementas + ", recursos=" + recursos
-				+ ", horarios=" + horarios + "]";
+				+ ", codigoMorada=" + codigoMorada + ", codigoArea=" + codigoArea + ", zonaArea=" + zonaArea + "]";
 	}
-
-	// TODO - Constructors Restaurante
-	// TODO - Getters and Setters Restaurante
-	// TODO - toString Restaurante
 
 }
