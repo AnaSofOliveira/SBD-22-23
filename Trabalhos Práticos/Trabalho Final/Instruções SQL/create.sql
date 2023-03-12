@@ -3,7 +3,7 @@ USE `the_spoon`;
 
 CREATE TABLE if not exists AREA_GEOGRAFICA (
 	codigoPostal INT NOT NULL, 
-    zonaPostal INT NOT NULL, 
+    zonaPostal char(3) NOT NULL, 
     freguesia varchar(50) NOT NULL, 
     concelho varchar(50) NOT NULL, 
     distrito varchar(50) NOT NULL
@@ -12,7 +12,7 @@ CREATE TABLE if not exists AREA_GEOGRAFICA (
 create table if not exists morada (
 	codigo int not null, 
     codigoPostal int not null, 
-    zonaPostal int not null, 
+    zonaPostal char(3) NOT NULL, 
     designacao varchar(250) not null
 );
 
@@ -30,7 +30,7 @@ create table if not exists restaurante (
     telefone int not null,
     codigoMorada int not null, 
     codigoArea int not null, 
-    zonaArea int not null
+    zonaArea char(3) not null
 );
 
 create table if not exists recursos_restaurante (
@@ -97,7 +97,7 @@ create table if not exists cliente (
     dataUltimaVisita datetime, 
     codigoMorada int not null, 
     codigoArea int not null, 
-    zonaArea int not null
+    zonaArea char(3) not null
 );
 
 create table if not exists funcionario (

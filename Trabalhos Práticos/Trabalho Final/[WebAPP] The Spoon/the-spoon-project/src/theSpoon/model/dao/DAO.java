@@ -3,17 +3,17 @@ package theSpoon.model.dao;
 import java.util.ArrayList;
 
 
-public interface DAO<E> {
+public interface DAO<Entity> {
 	
-	public boolean create(E t);
+	public Entity create(Entity entity);
 	
-	public boolean update(E t);
+	public Entity update(Entity entity);
 	
-	public E get(int id);
+	public Entity get(Entity entity);
 	
-	public boolean delete(int id);
+	public boolean delete(Entity entity);
 	
-	public ArrayList<E> listAll();
+	public ArrayList<Entity> listAll();
 	
 }
 	

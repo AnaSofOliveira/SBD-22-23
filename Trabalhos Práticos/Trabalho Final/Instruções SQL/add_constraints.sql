@@ -35,6 +35,7 @@ alter table item_ementa add constraint pk_item_ementa primary key (idItem, idEme
 
 -- MESA
 alter table mesa add constraint pk_mesa primary key (numero, codigoRestaurante);
+ALTER TABLE mesa MODIFY numero INT NOT NULL AUTO_INCREMENT;
 
 -- CARACTERISTICA
 alter table caracteristica add constraint pk_caracteristica primary key(numero); 
