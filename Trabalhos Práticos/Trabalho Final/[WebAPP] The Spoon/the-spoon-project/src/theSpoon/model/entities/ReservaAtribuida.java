@@ -22,6 +22,20 @@ public class ReservaAtribuida {
 		this.dataAlteracaoEstado = dataAlteracaoEstado;
 	}
 
+	
+
+	public ReservaAtribuida(int numeroReserva, int codigoRestaurante, int numeroFuncionario, EstadoReserva estado,
+			Date dataAlteracaoEstado) {
+		super();
+		this.numeroReserva = numeroReserva;
+		this.codigoRestaurante = codigoRestaurante;
+		this.numeroFuncionario = numeroFuncionario;
+		this.estado = estado;
+		this.dataAlteracaoEstado = dataAlteracaoEstado;
+	}
+
+
+
 	public int getNumeroReserva() {
 		return numeroReserva;
 	}

@@ -1,6 +1,5 @@
 package theSpoon.model.entities;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Reserva {
@@ -11,10 +10,16 @@ public class Reserva {
 	private int numeroCliente;
 	private int nroPessoas;
 	private Date dataPedidoReserva;
-	/*
-	 * private ArrayList<Caracteristica> caracteristicas; private ArrayList<Item>
-	 * itens;
-	 */
+
+	public Reserva(int codigoRestaurante, Date dataMarcacao, int numeroCliente, int nroPessoas,
+			Date dataPedidoReserva) {
+		super();
+		this.codigoRestaurante = codigoRestaurante;
+		this.dataMarcacao = dataMarcacao;
+		this.numeroCliente = numeroCliente;
+		this.nroPessoas = nroPessoas;
+		this.dataPedidoReserva = dataPedidoReserva;
+	}
 
 	public Reserva(int numero, int codigoRestaurante, Date dataMarcacao, int numeroCliente, int nroPessoas,
 			Date dataPedidoReserva) {
@@ -27,20 +32,6 @@ public class Reserva {
 		this.dataPedidoReserva = dataPedidoReserva;
 	}
 
-	public Reserva(int numero, int codigoRestaurante, Date dataMarcacao, int numeroCliente, int nroPessoas,
-			Date dataPedidoReserva, ArrayList<Caracteristica> caracteristicas, ArrayList<Item> itens) {
-		super();
-		this.numero = numero;
-		this.codigoRestaurante = codigoRestaurante;
-		this.dataMarcacao = dataMarcacao;
-		this.numeroCliente = numeroCliente;
-		this.nroPessoas = nroPessoas;
-		this.dataPedidoReserva = dataPedidoReserva;
-		/*
-		 * this.caracteristicas = caracteristicas; this.itens = itens;
-		 */
-	}
-
 	public int getNumero() {
 		return numero;
 	}
@@ -49,11 +40,11 @@ public class Reserva {
 		this.numero = numero;
 	}
 
-	public int getRestaurante() {
+	public int getCodigoRestaurante() {
 		return codigoRestaurante;
 	}
 
-	public void setRestaurante(int codigoRestaurante) {
+	public void setCodigoRestaurante(int codigoRestaurante) {
 		this.codigoRestaurante = codigoRestaurante;
 	}
 
@@ -65,11 +56,11 @@ public class Reserva {
 		this.dataMarcacao = dataMarcacao;
 	}
 
-	public int getCliente() {
+	public int getNumeroCliente() {
 		return numeroCliente;
 	}
 
-	public void setCliente(int numeroCliente) {
+	public void setNumeroCliente(int numeroCliente) {
 		this.numeroCliente = numeroCliente;
 	}
 
@@ -89,27 +80,11 @@ public class Reserva {
 		this.dataPedidoReserva = dataPedidoReserva;
 	}
 
-	/*
-	 * public ArrayList<Caracteristica> getCaracteristicas() { return
-	 * caracteristicas; }
-	 * 
-	 * public void setCaracteristicas(ArrayList<Caracteristica> caracteristicas) {
-	 * this.caracteristicas = caracteristicas; }
-	 * 
-	 * public ArrayList<Item> getItens() { return itens; }
-	 * 
-	 * public void setItens(ArrayList<Item> itens) { this.itens = itens; }
-	 */
-
 	@Override
 	public String toString() {
 		return "Reserva [numero=" + numero + ", restaurante=" + codigoRestaurante + ", dataMarcacao=" + dataMarcacao
-				+ ", cliente=" + numeroCliente + ", nroPessoas=" + nroPessoas + ", dataPedidoReserva=" + dataPedidoReserva
-				+ "]";
+				+ ", cliente=" + numeroCliente + ", nroPessoas=" + nroPessoas + ", dataPedidoReserva="
+				+ dataPedidoReserva + "]";
 	}
-
-	// TODO - Constructors Reserva
-	// TODO - Getters and Setters Reserva
-	// TODO - toString Reserva
 
 }

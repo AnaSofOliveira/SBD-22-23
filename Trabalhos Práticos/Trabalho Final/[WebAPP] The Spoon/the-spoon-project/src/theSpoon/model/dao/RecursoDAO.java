@@ -76,7 +76,7 @@ public class RecursoDAO implements DAO<Recurso>{
 
 				PreparedStatement preparedStatement = connection.prepareStatement(updateEmenta);
 
-				String caminho = entity.getPath() + "/" + entity.getNome() + "/" + entity.getExtensao();
+				String caminho = entity.getPath() + "/" + entity.getNome() + "." + entity.getExtensao();
 				
 				preparedStatement.setString(1, entity.getNome());
 				preparedStatement.setString(2, entity.getExtensao());
@@ -244,7 +244,10 @@ public class RecursoDAO implements DAO<Recurso>{
 		  recurso.setId(44);
 		  System.out.println(recursoDAO.get(recurso));
 		  
-		  ArrayList<Recurso> recursos = recursoDAO.listAll(); 
+		  Recurso recurso2 = new Recurso(44, "logo", "png", "WebContent/imgs");
+		  recursoDAO.update(recurso2);
+		  
+		  ArrayList<Recurso> recursos = recursoDAO.listAll();
 		  
 		  System.out.println("\nRecursos -> " + recursos);
 		  for (Recurso r : recursos) {
