@@ -1,18 +1,27 @@
 package theSpoon.model.entities;
 
+import java.awt.Image;
+
 public class Recurso {
 
 	private int id;
 	private String nome;
 	private String extensao;
-	private byte[] conteudo;
+	private String path;
 
-	public Recurso(int id, String nome, String extensao, byte[] conteudo) {
+	public Recurso(String nome, String extensao, String path) {
+		super();
+		this.nome = nome;
+		this.extensao = extensao;
+		this.path = path;
+	}
+
+	public Recurso(int id, String nome, String extensao, String path) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.extensao = extensao;
-		this.conteudo = conteudo;
+		this.path = path;
 	}
 
 	public int getId() {
@@ -39,12 +48,12 @@ public class Recurso {
 		this.extensao = extensao;
 	}
 
-	public byte[] getConteudo() {
-		return conteudo;
+	public String getPath() {
+		return path;
 	}
 
-	public void setConteudo(byte[] conteudo) {
-		this.conteudo = conteudo;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 	@Override
@@ -52,7 +61,4 @@ public class Recurso {
 		return "Recurso [id=" + id + ", nome=" + nome + ", extensao=" + extensao + "]";
 	}
 
-	// TODO - Constructors Recurso
-	// TODO - Getters and Setters Recurso
-	// TODO - toString Recurso
 }

@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import theSpoon.model.entities.Item;
 import theSpoon.model.entities.Mesa;
-import theSpoon.model.entities.TipoItem;
 import thsSpoon.model.database.DBConnection;
 
 public class MesaDAO implements DAO<Mesa>{
