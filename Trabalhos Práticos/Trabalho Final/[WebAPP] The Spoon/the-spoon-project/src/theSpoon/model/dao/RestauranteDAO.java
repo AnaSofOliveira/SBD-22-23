@@ -4,8 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
+import theSpoon.model.entities.DiaSemana;
+import theSpoon.model.entities.Ementa;
+import theSpoon.model.entities.Horario;
+import theSpoon.model.entities.Morada;
+import theSpoon.model.entities.Recurso;
 import theSpoon.model.entities.Restaurante;
 import thsSpoon.model.database.DBConnection;
 
@@ -101,7 +109,7 @@ public class RestauranteDAO implements DAO<Restaurante> {
 
 	@Override
 	public Restaurante get(Restaurante entity) {
-				
+
 		System.out.println("RestauranteDAO -> Start get");
 		Restaurante restaurante = null;
 
@@ -116,12 +124,11 @@ public class RestauranteDAO implements DAO<Restaurante> {
 
 				System.out.println(preparedStatement.toString());
 				ResultSet result = preparedStatement.executeQuery();
-				
+
 				while (result.next()) {
 					restaurante = new Restaurante(result.getInt("codigo"), result.getString("nome"),
 							result.getString("email"), result.getInt("telefone"), result.getInt("codigoMorada"),
 							result.getInt("codigoArea"), result.getString("zonaArea"));
-				
 
 				}
 				System.out.println("Commited");
@@ -135,13 +142,12 @@ public class RestauranteDAO implements DAO<Restaurante> {
 			System.out.println(e.getMessage());
 			return restaurante;
 		}
-		
-		
+
 	}
 
 	@Override
 	public boolean delete(Restaurante entity) {
-		
+
 		System.out.println("RestauranteDAO -> Start delete");
 
 		try {
@@ -156,7 +162,7 @@ public class RestauranteDAO implements DAO<Restaurante> {
 
 				System.out.println(preparedStatement.toString());
 				int result = preparedStatement.executeUpdate();
-				
+
 				connection.commit();
 				connection.setAutoCommit(true);
 				System.out.println("Commited");
@@ -171,7 +177,7 @@ public class RestauranteDAO implements DAO<Restaurante> {
 			System.out.println(e.getMessage());
 			return false;
 		}
-		
+
 	}
 
 	@Override
@@ -188,8 +194,8 @@ public class RestauranteDAO implements DAO<Restaurante> {
 
 				System.out.println(preparedStatement.toString());
 				ResultSet result = preparedStatement.executeQuery();
-				
-				Restaurante restaurante = null; 
+
+				Restaurante restaurante = null;
 				while (result.next()) {
 					restaurante = new Restaurante(result.getInt("codigo"), result.getString("nome"),
 							result.getString("email"), result.getInt("telefone"), result.getInt("codigoMorada"),
@@ -210,28 +216,198 @@ public class RestauranteDAO implements DAO<Restaurante> {
 		}
 	}
 
+	public ArrayList<Horario> getHorariosFromRestaurante(Restaurante restaurante) {
+		System.out.println("RestauranteDAO -> Start getHorariosFromRestaurante");
+		ArrayList<Horario> horarios = new ArrayList<>();
+
+		try {
+
+			try {
+				String getHorarios = "select * from horario as h inner join restaurante as r"
+						+ " on r.codigo = h.codigoRestaurante and r.codigo = ?" + " order by h.diaSemana;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getHorarios);
+
+				preparedStatement.setInt(1, restaurante.getCodigo());
+
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				Horario horario = null;
+				while (result.next()) {
+					horario = new Horario(result.getTime("horaInicio"), result.getTime("horaFim"),
+							DiaSemana.valueOf(result.getString("diaSemana")), result.getInt("idEmenta"),
+							result.getInt("codigoRestaurante"));
+					horarios.add(horario);
+
+				}
+				System.out.println("Commited");
+				return horarios;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return horarios;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return horarios;
+		}
+	}
+
+	public ArrayList<Ementa> getEmentasFromRestauranteInTime(Restaurante restaurante, String time, DiaSemana dia) {
+		System.out.println("RestauranteDAO -> Start getEmentasFromRestauranteInTime");
+		ArrayList<Ementa> ementas = new ArrayList<>();
+
+		try {
+
+			try {
+				String getEmentas = "select h.codigoRestaurante, e.id, e.designacao, h.horaInicio, h.horaFim, h.diaSemana "
+						+ "from ementa as e " + "inner join horario as h "
+						+ "on h.idEmenta = e.id and h.horaInicio < ? and h.horaFim > ? and h.diaSemana=? and h.codigoRestaurante=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getEmentas);
+
+				Date date = new SimpleDateFormat("HH:mm").parse(time);
+				time = new SimpleDateFormat("HH:mm").format(date);
+
+				preparedStatement.setString(1, time);
+				preparedStatement.setString(2, time);
+				preparedStatement.setObject(3, dia.toString());
+				preparedStatement.setInt(4, restaurante.getCodigo());
+
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				Ementa ementa = null;
+				while (result.next()) {
+					ementa = new Ementa(result.getInt("id"), result.getInt("codigoRestaurante"),
+							result.getString("designacao"));
+					ementas.add(ementa);
+
+				}
+				System.out.println("Commited");
+				return ementas;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return ementas;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return ementas;
+		}
+	}
+	
+	public Morada getMorada(Restaurante restaurante) {
+		System.out.println("RestauranteDAO -> Start getMorada");
+		Morada morada = null;
+		try {
+
+			try {
+				String getMorada = "select m.codigo, m.codigoPostal, m.zonaPostal, m.designacao from morada as m" + 
+						" inner join restaurante as r on m.codigo=r.codigoMorada and m.codigoPostal=r.codigoArea and m.zonaPostal=r.zonaArea and r.codigo=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getMorada);
+
+				preparedStatement.setInt(1, restaurante.getCodigo());
+
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				
+				while (result.next()) {
+					morada = new Morada(result.getInt("codigo"), result.getInt("codigoPostal"), result.getString("zonaPostal"), result.getString("designacao"));
+				}
+				System.out.println("Commited");
+				return morada;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return morada;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return morada;
+		}
+	}
+	
+	public Recurso getRecursoFromRestaurante(Restaurante restaurante) {
+		System.out.println("RestauranteDAO -> Start getRecursoFromRestaurante");
+		Recurso recurso = null;
+		try {
+
+			try {
+				String getMorada = "select * from recursos_restaurante where codigoRestaurante=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getMorada);
+
+				preparedStatement.setInt(1, restaurante.getCodigo());
+
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				
+				while (result.next()) {
+					recurso = new Recurso(result.getInt("idRecurso")); 
+					
+					RecursoDAO recursoDAO = new RecursoDAO(); 
+					recurso = recursoDAO.get(recurso);
+				}
+				System.out.println("Commited");
+				return recurso;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return recurso;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return recurso;
+		}
+	}
 	
 
 	public static void main(String[] args) {
 		Restaurante restaurante = new Restaurante("Teste", "teste@gmail.com", 911039236, 2, 1700, "120");
-		RestauranteDAO restauranteDAO = new RestauranteDAO(); 
-		
-		restauranteDAO.create(restaurante); 
-		
+		RestauranteDAO restauranteDAO = new RestauranteDAO();
+
+		restauranteDAO.create(restaurante);
+
 		restaurante.setCodigo(2);
 		restaurante.setNome("Outro Nome");
-		
-		restauranteDAO.update(restaurante); 
-		
+
+		restauranteDAO.update(restaurante);
+
 		System.out.println(restauranteDAO.get(restaurante));
-		
+
 		ArrayList<Restaurante> restaurantes = restauranteDAO.listAll();
-		
-		for (int i = 0; i < restaurantes.size() ; i++) {
-			System.out.println(restaurantes.get(i));
+
+		Restaurante rest;
+		for (int i = 0; i < restaurantes.size(); i++) {
+			rest = restaurantes.get(i);
+			System.out.println(rest);
+			System.out.println(restauranteDAO.getMorada(rest));
+		}
+
+		System.out.println(restauranteDAO.delete(restaurante));
+
+		ArrayList<Horario> horarios = restauranteDAO
+				.getHorariosFromRestaurante(new Restaurante(1, "Teste", "Teste", 911039236, 3, 3, "003"));
+
+		for (int i = 0; i < horarios.size(); i++) {
+			System.out.println(horarios.get(i));
+		}
+
+		DiaSemana diaSemana = DiaSemana.Seg;
+
+		ArrayList<Ementa> ementas = restauranteDAO.getEmentasFromRestauranteInTime(restaurante, "11:00", diaSemana);
+
+		for (int i = 0; i < ementas.size(); i++) {
+			System.out.println(ementas.get(i));
 		}
 		
-		System.out.println(restauranteDAO.delete(restaurante));
+		System.out.println(restauranteDAO.getRecursoFromRestaurante(restaurante));
+
 	}
 
 }

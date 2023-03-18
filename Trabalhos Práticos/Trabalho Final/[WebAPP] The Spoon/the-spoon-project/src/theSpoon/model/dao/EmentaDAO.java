@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import theSpoon.model.entities.Ementa;
+import theSpoon.model.entities.Item;
+import theSpoon.model.entities.TipoItem;
 import thsSpoon.model.database.DBConnection;
 
 public class EmentaDAO implements DAO<Ementa> {
@@ -188,6 +190,47 @@ public class EmentaDAO implements DAO<Ementa> {
 			return ementas;
 		}
 	}
+	
+	public ArrayList<Item> getItensFromEmenta(Ementa ementa){
+		System.out.println("EmentaDAO -> Start getItensFromEmenta");
+		ArrayList<Item> itens = new ArrayList<>();
+
+		try {
+
+			try {
+				String getItens = "select * from item_ementa as ie" + 
+						" inner join ementa as e on ie.idEmenta=e.id and e.id=?" + 
+						" inner join item as i on ie.idItem=i.id;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getItens);
+
+				preparedStatement.setInt(1, ementa.getId());
+				
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+				
+				Item item = null;
+				while (result.next()) {
+					item = new Item(
+							result.getInt("id"), 
+							result.getString("designacao"),
+							result.getString("descricao"), 
+							TipoItem.valueOf(result.getString("tipo")), 
+							result.getInt("idRecurso"));
+					itens.add(item);
+				}
+				System.out.println("Commited");
+				return itens;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return itens;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return itens;
+		}
+	}
 
 	public static void main(String[] args) {
 		EmentaDAO ementaDAO = new EmentaDAO();
@@ -203,6 +246,7 @@ public class EmentaDAO implements DAO<Ementa> {
 
 		for (Ementa c : ementas) {
 			System.out.println(c);
+			System.out.println(ementaDAO.getItensFromEmenta(c));
 		}
 
 		ementaDAO.delete(ementa);

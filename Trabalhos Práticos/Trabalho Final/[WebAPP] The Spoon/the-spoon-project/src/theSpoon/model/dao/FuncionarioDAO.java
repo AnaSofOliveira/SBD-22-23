@@ -100,9 +100,9 @@ public class FuncionarioDAO implements DAO<Funcionario> {
 
 				if (result == 1) {
 					try {
-						String updateCliente = "update funcionario set chefe=?, codigoRestaurante=? where numero=?";
+						String updateFuncionario = "update funcionario set chefe=?, codigoRestaurante=? where numero=?";
 
-						preparedStatement = connection.prepareStatement(updateCliente);
+						preparedStatement = connection.prepareStatement(updateFuncionario);
 
 						preparedStatement.setInt(1,
 								entity.getNumeroFuncionarioChefe() != -1 ? entity.getNumeroFuncionarioChefe() : -1);

@@ -22,4 +22,5 @@ public enum DiaSemana {
 		}
 		return null;
 	}
+	
 }

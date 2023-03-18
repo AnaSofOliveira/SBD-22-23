@@ -8,6 +8,11 @@ public class Recurso {
 	private String nome;
 	private String extensao;
 	private String path;
+	
+	public Recurso(int id) {
+		super(); 
+		this.id = id;
+	}
 
 	public Recurso(String nome, String extensao, String path) {
 		super();
@@ -58,7 +63,7 @@ public class Recurso {
 
 	@Override
 	public String toString() {
-		return "Recurso [id=" + id + ", nome=" + nome + ", extensao=" + extensao + "]";
+		return "Recurso [id=" + id + ", nome=" + nome + ", extensao=" + extensao + ", path=" + path + "]";
 	}
 
 }

@@ -125,6 +125,7 @@ create table if not exists caracteristicas_reserva (
 create table if not exists item_reserva (
 	numeroReserva int not null, 
     codigoRestaurante int not null, 
+    
     idItem int not null, 
     quantidade int not null
 );

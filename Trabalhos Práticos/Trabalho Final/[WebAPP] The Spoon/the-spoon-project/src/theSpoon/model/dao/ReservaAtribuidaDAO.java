@@ -20,14 +20,14 @@ public class ReservaAtribuidaDAO implements DAO<ReservaAtribuida> {
 
 	@Override
 	public ReservaAtribuida create(ReservaAtribuida entity) {
-		System.out.println("EmentaDAO -> Start create");
+		System.out.println("ReservaAtribuidaDAO -> Start create");
 
 		try {
 			connection.setAutoCommit(false);
 
-			String insertEmenta = "insert into reservas_atribuidas (numeroReserva, codigoRestaurante, numeroFuncionario, numeroMesa, estado, dataHora) values (?, ?, ?, ?, ?, ?)";
+			String insertReservaAtribuida = "insert into reservas_atribuidas (numeroReserva, codigoRestaurante, numeroFuncionario, numeroMesa, estado, dataHora) values (?, ?, ?, ?, ?, ?)";
 
-			PreparedStatement preparedStatement = connection.prepareStatement(insertEmenta);
+			PreparedStatement preparedStatement = connection.prepareStatement(insertReservaAtribuida);
 
 			preparedStatement.setInt(1, entity.getNumeroReserva());
 			preparedStatement.setInt(2, entity.getCodigoRestaurante());
@@ -63,15 +63,15 @@ public class ReservaAtribuidaDAO implements DAO<ReservaAtribuida> {
 
 	@Override
 	public ReservaAtribuida update(ReservaAtribuida entity) {
-		System.out.println("EmentaDAO -> Start update");
+		System.out.println("ReservaAtribuidaDAO -> Start update");
 
 		try {
 			connection.setAutoCommit(false);
 
 			try {
-				String updateEmenta = "update reservas_atribuidas set numeroMesa=?, estado=? where numeroReserva=? and codigoRestaurante=?;";
+				String updateReservaAtribuida = "update reservas_atribuidas set numeroMesa=?, estado=? where numeroReserva=? and codigoRestaurante=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(updateEmenta);
+				PreparedStatement preparedStatement = connection.prepareStatement(updateReservaAtribuida);
 
 				preparedStatement.setInt(1, entity.getNumeroMesa());
 				preparedStatement.setString(2, entity.getEstado().toString());
@@ -102,15 +102,15 @@ public class ReservaAtribuidaDAO implements DAO<ReservaAtribuida> {
 
 	@Override
 	public ReservaAtribuida get(ReservaAtribuida entity) {
-		System.out.println("EmentaDAO -> Start get");
+		System.out.println("ReservaAtribuidaDAO -> Start get");
 
 		ReservaAtribuida reservaAtribuida = null;
 		try {
 
 			try {
-				String getItem = "select * from reservas_atribuidas where numeroReserva=? and codigoRestaurante=?;";
+				String getReservaAtribuida = "select * from reservas_atribuidas where numeroReserva=? and codigoRestaurante=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(getItem);
+				PreparedStatement preparedStatement = connection.prepareStatement(getReservaAtribuida);
 
 				preparedStatement.setInt(1, entity.getNumeroReserva());
 				preparedStatement.setInt(2, entity.getCodigoRestaurante());
@@ -142,15 +142,15 @@ public class ReservaAtribuidaDAO implements DAO<ReservaAtribuida> {
 
 	@Override
 	public boolean delete(ReservaAtribuida entity) {
-		System.out.println("EmentaDAO -> Start delete");
+		System.out.println("ReservaAtribuidaDAO -> Start delete");
 
 		try {
 			connection.setAutoCommit(false);
 
 			try {
-				String deleteEmenta = "delete from reservas_atribuidas where numeroReserva=? and codigoRestaurante=?;";
+				String deleteReservaAtribuida = "delete from reservas_atribuidas where numeroReserva=? and codigoRestaurante=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(deleteEmenta);
+				PreparedStatement preparedStatement = connection.prepareStatement(deleteReservaAtribuida);
 
 				preparedStatement.setInt(1, entity.getNumeroReserva());
 				preparedStatement.setInt(2, entity.getCodigoRestaurante());
@@ -176,15 +176,15 @@ public class ReservaAtribuidaDAO implements DAO<ReservaAtribuida> {
 
 	@Override
 	public ArrayList<ReservaAtribuida> listAll() {
-		System.out.println("EmentaDAO -> Start get");
+		System.out.println("ReservaAtribuidaDAO -> Start get");
 
 		ArrayList<ReservaAtribuida> reservasAtribuidas = new ArrayList<>();
 		try {
 
 			try {
-				String getItem = "select * from reservas_atribuidas;";
+				String getReservaAtribuida = "select * from reservas_atribuidas;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(getItem);
+				PreparedStatement preparedStatement = connection.prepareStatement(getReservaAtribuida);
 
 				System.out.println(preparedStatement.toString());
 				ResultSet result = preparedStatement.executeQuery();
