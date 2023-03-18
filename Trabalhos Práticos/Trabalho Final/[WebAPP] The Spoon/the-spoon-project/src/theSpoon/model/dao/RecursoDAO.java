@@ -25,14 +25,14 @@ public class RecursoDAO implements DAO<Recurso>{
 
 	@Override
 	public Recurso create(Recurso entity) {
-		System.out.println("EmentaDAO -> Start create");
+		System.out.println("RecursoDAO -> Start create");
 
 		try {
 			connection.setAutoCommit(false);
 
-			String insertEmenta = "insert into recurso_multimedia (nome, extensao, conteudo) values (?, ?, ?)";
+			String insertRecurso = "insert into recurso_multimedia (nome, extensao, conteudo) values (?, ?, ?)";
 
-			PreparedStatement preparedStatement = connection.prepareStatement(insertEmenta);
+			PreparedStatement preparedStatement = connection.prepareStatement(insertRecurso);
 
 			String caminho = entity.getPath() + "/" + entity.getNome() + "." + entity.getExtensao();
 			
@@ -66,15 +66,15 @@ public class RecursoDAO implements DAO<Recurso>{
 
 	@Override
 	public Recurso update(Recurso entity) {
-		System.out.println("EmentaDAO -> Start update");
+		System.out.println("RecursoDAO -> Start update");
 
 		try {
 			connection.setAutoCommit(false);
 
 			try {
-				String updateEmenta = "update recurso_multimedia set nome=?, extensao=?, conteudo=? where id=?;";
+				String updateRecurso = "update recurso_multimedia set nome=?, extensao=?, conteudo=? where id=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(updateEmenta);
+				PreparedStatement preparedStatement = connection.prepareStatement(updateRecurso);
 
 				String caminho = entity.getPath() + "/" + entity.getNome() + "." + entity.getExtensao();
 				
@@ -107,15 +107,15 @@ public class RecursoDAO implements DAO<Recurso>{
 
 	@Override
 	public Recurso get(Recurso entity) {
-		System.out.println("EmentaDAO -> Start get");
+		System.out.println("RecursoDAO -> Start get");
 
 		Recurso recurso = null;
 		try {
 
 			try {
-				String getItem = "select * from recurso_multimedia where id=?;";
+				String getRecurso = "select * from recurso_multimedia where id=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(getItem);
+				PreparedStatement preparedStatement = connection.prepareStatement(getRecurso);
 
 				preparedStatement.setInt(1, entity.getId());
 
@@ -153,15 +153,15 @@ public class RecursoDAO implements DAO<Recurso>{
 
 	@Override
 	public boolean delete(Recurso entity) {
-		System.out.println("EmentaDAO -> Start delete");
+		System.out.println("RecursoDAO -> Start delete");
 
 		try {
 			connection.setAutoCommit(false);
 
 			try {
-				String deleteEmenta = "delete from recurso_multimedia where id=?;";
+				String deleteRecurso = "delete from recurso_multimedia where id=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(deleteEmenta);
+				PreparedStatement preparedStatement = connection.prepareStatement(deleteRecurso);
 
 				preparedStatement.setInt(1, entity.getId());
 				
@@ -186,15 +186,15 @@ public class RecursoDAO implements DAO<Recurso>{
 
 	@Override
 	public ArrayList<Recurso> listAll() {
-		System.out.println("EmentaDAO -> Start listAll");
+		System.out.println("RecursoDAO -> Start listAll");
 
 		ArrayList<Recurso> recursos = new ArrayList<>();
 		try {
 
 			try {
-				String getItem = "select * from recurso_multimedia;";
+				String getRecurso = "select * from recurso_multimedia;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(getItem);
+				PreparedStatement preparedStatement = connection.prepareStatement(getRecurso);
 
 				System.out.println(preparedStatement.toString());
 				ResultSet result = preparedStatement.executeQuery();

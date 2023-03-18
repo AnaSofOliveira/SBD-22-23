@@ -100,7 +100,6 @@ public class AreaGeograficaDAO implements DAO<AreaGeografica> {
 
 	@Override
 	public AreaGeografica get(AreaGeografica entity) {
-
 		System.out.println("AreaGeograficaDAO -> Start get");
 
 		AreaGeografica areaGeografica = null;

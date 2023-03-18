@@ -19,14 +19,14 @@ public class ReservaDAO implements DAO<Reserva> {
 
 	@Override
 	public Reserva create(Reserva entity) {
-		System.out.println("EmentaDAO -> Start create");
+		System.out.println("ReservaDAO -> Start create");
 
 		try {
 			connection.setAutoCommit(false);
 
-			String insertEmenta = "insert into reserva (codigoRestaurante, dataHoraMarcacao, numeroCliente, nroPessoas, dataHora) values (?, ?, ?, ?, ?)";
+			String insertReserva = "insert into reserva (codigoRestaurante, dataHoraMarcacao, numeroCliente, nroPessoas, dataHora) values (?, ?, ?, ?, ?)";
 
-			PreparedStatement preparedStatement = connection.prepareStatement(insertEmenta);
+			PreparedStatement preparedStatement = connection.prepareStatement(insertReserva);
 
 			preparedStatement.setInt(1, entity.getCodigoRestaurante());
 			preparedStatement.setObject(2, entity.getDataMarcacao());
@@ -61,15 +61,15 @@ public class ReservaDAO implements DAO<Reserva> {
 
 	@Override
 	public Reserva update(Reserva entity) {
-		System.out.println("EmentaDAO -> Start update");
+		System.out.println("ReservaDAO -> Start update");
 
 		try {
 			connection.setAutoCommit(false);
 
 			try {
-				String updateEmenta = "update reserva set dataHoraMarcacao=?, nroPessoas=? where numero=? and codigoRestaurante=?;";
+				String updateReserva = "update reserva set dataHoraMarcacao=?, nroPessoas=? where numero=? and codigoRestaurante=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(updateEmenta);
+				PreparedStatement preparedStatement = connection.prepareStatement(updateReserva);
 
 				preparedStatement.setObject(1, entity.getDataMarcacao());
 				preparedStatement.setInt(2, entity.getNroPessoas());
@@ -100,15 +100,15 @@ public class ReservaDAO implements DAO<Reserva> {
 
 	@Override
 	public Reserva get(Reserva entity) {
-		System.out.println("EmentaDAO -> Start get");
+		System.out.println("ReservaDAO -> Start get");
 
 		Reserva reserva = null;
 		try {
 
 			try {
-				String getItem = "select * from reserva where numero=? and codigoRestaurante=? and numeroCliente=?;";
+				String getReserva = "select * from reserva where numero=? and codigoRestaurante=? and numeroCliente=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(getItem);
+				PreparedStatement preparedStatement = connection.prepareStatement(getReserva);
 
 				preparedStatement.setInt(1, entity.getNumero());
 				preparedStatement.setInt(2, entity.getCodigoRestaurante());
@@ -137,15 +137,15 @@ public class ReservaDAO implements DAO<Reserva> {
 
 	@Override
 	public boolean delete(Reserva entity) {
-		System.out.println("EmentaDAO -> Start delete");
+		System.out.println("ReservaDAO -> Start delete");
 
 		try {
 			connection.setAutoCommit(false);
 
 			try {
-				String deleteEmenta = "delete from reserva where numero=? and codigoRestaurante=? and numeroCliente=?;";
+				String deleteReserva = "delete from reserva where numero=? and codigoRestaurante=? and numeroCliente=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(deleteEmenta);
+				PreparedStatement preparedStatement = connection.prepareStatement(deleteReserva);
 
 				preparedStatement.setInt(1, entity.getNumero());
 				preparedStatement.setInt(2, entity.getCodigoRestaurante());
@@ -172,15 +172,15 @@ public class ReservaDAO implements DAO<Reserva> {
 
 	@Override
 	public ArrayList<Reserva> listAll() {
-		System.out.println("EmentaDAO -> Start get");
+		System.out.println("ReservaDAO -> Start get");
 
 		ArrayList<Reserva> reservas = new ArrayList<>();
 
 		try {
 			try {
-				String getItem = "select * from reserva;";
+				String getReserva = "select * from reserva;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(getItem);
+				PreparedStatement preparedStatement = connection.prepareStatement(getReserva);
 
 				System.out.println(preparedStatement.toString());
 				ResultSet result = preparedStatement.executeQuery();

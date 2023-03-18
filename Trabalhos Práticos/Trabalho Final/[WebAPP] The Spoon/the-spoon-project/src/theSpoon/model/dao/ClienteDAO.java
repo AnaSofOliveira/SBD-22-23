@@ -255,7 +255,7 @@ public class ClienteDAO implements DAO<Cliente> {
 	@Override
 	public ArrayList<Cliente> listAll() {
 
-		System.out.println("ClienteDAO -> Start get");
+		System.out.println("ClienteDAO -> Start listAll");
 		ArrayList<Cliente> clientes = new ArrayList<>();
 
 		try {

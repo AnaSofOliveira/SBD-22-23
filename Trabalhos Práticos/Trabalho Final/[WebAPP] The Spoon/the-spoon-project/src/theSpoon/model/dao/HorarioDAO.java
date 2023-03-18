@@ -108,15 +108,15 @@ public class HorarioDAO implements DAO<Horario>{
 
 	@Override
 	public Horario get(Horario entity) {
-		System.out.println("FuncionarioDAO -> Start get");
+		System.out.println("HorarioDAO -> Start get");
 		Horario horario = null;
 
 		try {
 
 			try {
-				String getFuncionario = "select * from horario where diaSemana=? and idEmenta=? and codigoRestaurante=?;";
+				String getHorario = "select * from horario where diaSemana=? and idEmenta=? and codigoRestaurante=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(getFuncionario);
+				PreparedStatement preparedStatement = connection.prepareStatement(getHorario);
 
 				preparedStatement.setString(1, entity.getDiaSemana().toString());
 				preparedStatement.setInt(2, entity.getIdEmenta());
@@ -146,15 +146,15 @@ public class HorarioDAO implements DAO<Horario>{
 
 	@Override
 	public boolean delete(Horario entity) {
-		System.out.println("FuncionarioDAO -> Start delete");
+		System.out.println("HorarioDAO -> Start delete");
 
 		try {
 			connection.setAutoCommit(false);
 
 			try {
-				String deleteFuncionario = "delete from horario where diaSemana=? and idEmenta=? and codigoRestaurante=?;";
+				String deleteHorario = "delete from horario where diaSemana=? and idEmenta=? and codigoRestaurante=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(deleteFuncionario);
+				PreparedStatement preparedStatement = connection.prepareStatement(deleteHorario);
 
 				preparedStatement.setString(1, entity.getDiaSemana().toString());
 				preparedStatement.setInt(2, entity.getIdEmenta());
@@ -180,15 +180,15 @@ public class HorarioDAO implements DAO<Horario>{
 
 	@Override
 	public ArrayList<Horario> listAll() {
-		System.out.println("EmentaDAO -> Start listAll");
+		System.out.println("HorarioDAO -> Start listAll");
 		ArrayList<Horario> horarios = new ArrayList<>();
 
 		try {
 
 			try {
-				String getEmenta = "select * from horario;";
+				String getHorario = "select * from horario;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(getEmenta);
+				PreparedStatement preparedStatement = connection.prepareStatement(getHorario);
 
 				System.out.println(preparedStatement.toString());
 				ResultSet result = preparedStatement.executeQuery();

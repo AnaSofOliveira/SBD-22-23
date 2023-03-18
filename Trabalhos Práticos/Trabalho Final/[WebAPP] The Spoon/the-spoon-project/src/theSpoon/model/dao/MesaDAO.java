@@ -15,14 +15,14 @@ public class MesaDAO implements DAO<Mesa>{
 	
 	@Override
 	public Mesa create(Mesa entity) {
-		System.out.println("EmentaDAO -> Start create");
+		System.out.println("MesaDAO -> Start create");
 
 		try {
 			connection.setAutoCommit(false);
 
-			String insertEmenta = "insert into mesa (codigoRestaurante, lotacao) values (?, ?)";
+			String insertMesa = "insert into mesa (codigoRestaurante, lotacao) values (?, ?)";
 
-			PreparedStatement preparedStatement = connection.prepareStatement(insertEmenta);
+			PreparedStatement preparedStatement = connection.prepareStatement(insertMesa);
 
 			preparedStatement.setInt(1, entity.getCodigoRestaurante());
 			preparedStatement.setInt(2, entity.getLotacao());
@@ -53,15 +53,15 @@ public class MesaDAO implements DAO<Mesa>{
 
 	@Override
 	public Mesa update(Mesa entity) {
-		System.out.println("EmentaDAO -> Start update");
+		System.out.println("MesaDAO -> Start update");
 
 		try {
 			connection.setAutoCommit(false);
 
 			try {
-				String updateEmenta = "update mesa set lotacao=? where numero=? and codigoRestaurante=?;";
+				String updateMesa = "update mesa set lotacao=? where numero=? and codigoRestaurante=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(updateEmenta);
+				PreparedStatement preparedStatement = connection.prepareStatement(updateMesa);
 
 				preparedStatement.setInt(1, entity.getLotacao());
 				preparedStatement.setInt(2, entity.getNumero());
@@ -91,15 +91,15 @@ public class MesaDAO implements DAO<Mesa>{
 
 	@Override
 	public Mesa get(Mesa entity) {
-		System.out.println("EmentaDAO -> Start get");
+		System.out.println("MesaDAO -> Start get");
 
 		Mesa mesa = null;
 		try {
 
 			try {
-				String getItem = "select * from mesa where numero=? and codigoRestaurante=?;";
+				String getMesa = "select * from mesa where numero=? and codigoRestaurante=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(getItem);
+				PreparedStatement preparedStatement = connection.prepareStatement(getMesa);
 
 				preparedStatement.setInt(1, entity.getNumero());
 				preparedStatement.setInt(2, entity.getCodigoRestaurante());
@@ -125,15 +125,15 @@ public class MesaDAO implements DAO<Mesa>{
 
 	@Override
 	public boolean delete(Mesa entity) {
-		System.out.println("EmentaDAO -> Start delete");
+		System.out.println("MesaDAO -> Start delete");
 
 		try {
 			connection.setAutoCommit(false);
 
 			try {
-				String deleteEmenta = "delete from mesa where numero=? and codigoRestaurante=?;";
+				String deleteMesa = "delete from mesa where numero=? and codigoRestaurante=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(deleteEmenta);
+				PreparedStatement preparedStatement = connection.prepareStatement(deleteMesa);
 
 				preparedStatement.setInt(1, entity.getNumero());
 				preparedStatement.setInt(2, entity.getCodigoRestaurante());
@@ -159,15 +159,15 @@ public class MesaDAO implements DAO<Mesa>{
 
 	@Override
 	public ArrayList<Mesa> listAll() {
-		System.out.println("EmentaDAO -> Start listAll");
+		System.out.println("MesaDAO -> Start listAll");
 		ArrayList<Mesa> mesas = new ArrayList<>();
 
 		try {
 
 			try {
-				String getEmenta = "select * from mesa;";
+				String getMesa = "select * from mesa;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(getEmenta);
+				PreparedStatement preparedStatement = connection.prepareStatement(getMesa);
 
 				System.out.println(preparedStatement.toString());
 				ResultSet result = preparedStatement.executeQuery();

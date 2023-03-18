@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import theSpoon.model.entities.AreaGeografica;
 import theSpoon.model.entities.Morada;
 import thsSpoon.model.database.DBConnection;
 
@@ -194,6 +195,45 @@ public class MoradaDAO implements DAO<Morada> {
 		}
 	}
 	
+	public AreaGeografica getAreaGeograficaFromMorada(Morada morada) {
+		System.out.println("MoradaDAO -> Start getAreaGeograficaFromMorada");
+		AreaGeografica areaGeografica = null;
+
+		try {
+
+			try {
+				String getAreaGeografica = "select * from area_geografica as ag " + 
+						"inner join morada as m on ag.codigoPostal=m.codigoPostal and ag.zonaPostal=m.zonaPostal and m.codigo=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getAreaGeografica);
+
+				preparedStatement.setInt(1, morada.getCodigo());
+				
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				while (result.next()) {
+					areaGeografica = new AreaGeografica(
+							result.getInt("codigoPostal"), 
+							result.getString("zonaPostal"), 
+							result.getString("freguesia"), 
+							result.getString("concelho"), 
+							result.getString("distrito"));
+					
+				}
+				System.out.println("Commited");
+				return areaGeografica;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return areaGeografica;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return areaGeografica;
+		}
+	}
+	
 	public static void main(String[] args) {
 		
 		
@@ -208,7 +248,10 @@ public class MoradaDAO implements DAO<Morada> {
 		  
 		  ArrayList<Morada> moradas = moradaDAO.listAll();
 		  
-		  for(Morada mor : moradas) { System.out.println(mor); }
+		  for(Morada mor : moradas) { 
+			  System.out.println(mor);
+			  System.out.println(moradaDAO.getAreaGeograficaFromMorada(mor));
+		  }
 
 		  moradaDAO.delete(morada);
 				

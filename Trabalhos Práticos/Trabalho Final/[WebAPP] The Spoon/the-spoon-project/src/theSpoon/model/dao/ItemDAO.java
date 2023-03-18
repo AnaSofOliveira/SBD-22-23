@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import theSpoon.model.entities.Item;
+import theSpoon.model.entities.Recurso;
+import theSpoon.model.entities.Restaurante;
 import theSpoon.model.entities.TipoItem;
 import thsSpoon.model.database.DBConnection;
 
@@ -16,14 +18,14 @@ public class ItemDAO implements DAO<Item>{
 	
 	@Override
 	public Item create(Item entity) {
-		System.out.println("EmentaDAO -> Start create");
+		System.out.println("ItemDAO -> Start create");
 
 		try {
 			connection.setAutoCommit(false);
 
-			String insertEmenta = "insert into item (id, designacao, descricao, tipo, idRecurso) values (?, ?, ?, ?, ?)";
+			String insertItem = "insert into item (id, designacao, descricao, tipo, idRecurso) values (?, ?, ?, ?, ?)";
 
-			PreparedStatement preparedStatement = connection.prepareStatement(insertEmenta);
+			PreparedStatement preparedStatement = connection.prepareStatement(insertItem);
 
 			preparedStatement.setInt(1, entity.getId());
 			preparedStatement.setString(2, entity.getDesignacao());
@@ -57,15 +59,15 @@ public class ItemDAO implements DAO<Item>{
 
 	@Override
 	public Item update(Item entity) {
-		System.out.println("EmentaDAO -> Start update");
+		System.out.println("ItemDAO -> Start update");
 
 		try {
 			connection.setAutoCommit(false);
 
 			try {
-				String updateEmenta = "update item set designacao=?, descricao=?, tipo=?, idRecurso=? where id=?;";
+				String updateItem = "update item set designacao=?, descricao=?, tipo=?, idRecurso=? where id=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(updateEmenta);
+				PreparedStatement preparedStatement = connection.prepareStatement(updateItem);
 
 				preparedStatement.setInt(1, entity.getId());
 
@@ -93,7 +95,7 @@ public class ItemDAO implements DAO<Item>{
 
 	@Override
 	public Item get(Item entity) {
-		System.out.println("EmentaDAO -> Start get");
+		System.out.println("ItemDAO -> Start get");
 
 		Item item = null;
 		try {
@@ -127,15 +129,15 @@ public class ItemDAO implements DAO<Item>{
 
 	@Override
 	public boolean delete(Item entity) {
-		System.out.println("EmentaDAO -> Start delete");
+		System.out.println("ItemDAO -> Start delete");
 
 		try {
 			connection.setAutoCommit(false);
 
 			try {
-				String deleteEmenta = "delete from item where id=?;";
+				String deleteItem = "delete from item where id=?;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(deleteEmenta);
+				PreparedStatement preparedStatement = connection.prepareStatement(deleteItem);
 
 				preparedStatement.setInt(1, entity.getId());
 
@@ -160,15 +162,15 @@ public class ItemDAO implements DAO<Item>{
 
 	@Override
 	public ArrayList<Item> listAll() {
-		System.out.println("EmentaDAO -> Start listAll");
+		System.out.println("ItemDAO -> Start listAll");
 		ArrayList<Item> itens = new ArrayList<>();
 
 		try {
 
 			try {
-				String getEmenta = "select * from item;";
+				String getItem = "select * from item;";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(getEmenta);
+				PreparedStatement preparedStatement = connection.prepareStatement(getItem);
 
 				System.out.println(preparedStatement.toString());
 				ResultSet result = preparedStatement.executeQuery();
@@ -192,6 +194,42 @@ public class ItemDAO implements DAO<Item>{
 		}
 	}
 	
+	public Recurso getRecursosFromItem(Item item) {
+		System.out.println("ItemDAO -> Start getRecursosFromItem");
+		Recurso recurso = null;
+		try {
+
+			try {
+				String getMorada = "select rm.id as idRecurso from recurso_multimedia as rm " + 
+						"inner join item as i on rm.id=i.idRecurso and i.id=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getMorada);
+
+				preparedStatement.setInt(1, item.getId());
+
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				
+				while (result.next()) {
+					recurso = new Recurso(result.getInt("idRecurso")); 
+					
+					RecursoDAO recursoDAO = new RecursoDAO(); 
+					recurso = recursoDAO.get(recurso);
+				}
+				System.out.println("Commited");
+				return recurso;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return recurso;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return recurso;
+		}
+	}
+	
 	public static void main(String[] args) {
 		ItemDAO itemDAO = new ItemDAO();
 
@@ -203,10 +241,11 @@ public class ItemDAO implements DAO<Item>{
 		Item car = itemDAO.get(item);
 		System.out.println(car);
 
-		ArrayList<Item> ementas = itemDAO.listAll();
+		ArrayList<Item> itens = itemDAO.listAll();
 
-		for (Item c : ementas) {
-			System.out.println(c);
+		for (Item i : itens) {
+			System.out.println(i);
+			System.out.println(itemDAO.getRecursosFromItem(i) + "\n");
 		}
 
 		itemDAO.delete(item);

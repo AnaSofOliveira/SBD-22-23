@@ -22,6 +22,13 @@ public class Morada {
 		this.designacao = designacao;
 	}
 
+	public Morada(int codigo, int codigoPostal, String zonaPostal) {
+		super();
+		this.codigo = codigo;
+		this.codigoPostal = codigoPostal;
+		this.zonaPostal = zonaPostal;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}
