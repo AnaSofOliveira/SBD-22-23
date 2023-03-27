@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import theSpoon.model.database.DBConnection;
 import theSpoon.model.entities.DiaSemana;
 import theSpoon.model.entities.Ementa;
 import theSpoon.model.entities.Horario;
 import theSpoon.model.entities.Morada;
 import theSpoon.model.entities.Recurso;
 import theSpoon.model.entities.Restaurante;
-import thsSpoon.model.database.DBConnection;
 
 public class RestauranteDAO implements DAO<Restaurante> {
 
@@ -223,8 +223,11 @@ public class RestauranteDAO implements DAO<Restaurante> {
 		try {
 
 			try {
-				String getHorarios = "select * from horario as h inner join restaurante as r"
-						+ " on r.codigo = h.codigoRestaurante and r.codigo = ?" + " order by h.diaSemana;";
+				String getHorarios = "select h.diaSemana as diaSemana, min(h.horaInicio) as horaInicio, max(h.horaFim) as horaFim from horario as h " + 
+						"inner join restaurante as r " + 
+						"on r.codigo = h.codigoRestaurante and r.codigo = ? " + 
+						"group by h.diaSemana " + 
+						"order by h.diaSemana;";
 
 				PreparedStatement preparedStatement = connection.prepareStatement(getHorarios);
 
@@ -236,8 +239,7 @@ public class RestauranteDAO implements DAO<Restaurante> {
 				Horario horario = null;
 				while (result.next()) {
 					horario = new Horario(result.getTime("horaInicio"), result.getTime("horaFim"),
-							DiaSemana.valueOf(result.getString("diaSemana")), result.getInt("idEmenta"),
-							result.getInt("codigoRestaurante"));
+							DiaSemana.valueOf(result.getString("diaSemana")));
 					horarios.add(horario);
 
 				}
@@ -366,6 +368,79 @@ public class RestauranteDAO implements DAO<Restaurante> {
 		}
 	}
 	
+	public Restaurante findByNome(String nome) {
+		System.out.println("RestauranteDAO -> Start findByNome");
+		Restaurante restaurante = null;
+		try {
+
+			try {
+				String getRestaurante = "select * from restaurante where nome=?; ";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getRestaurante);
+
+				preparedStatement.setString(1, nome);
+
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				while (result.next()) {
+					restaurante = new Restaurante(
+							result.getInt("codigo"), 
+							result.getString("nome"), 
+							result.getString("email"), 
+							result.getInt("telefone"), 
+							result.getInt("codigoMorada"), 
+							result.getInt("codigoArea"), 
+							result.getString("zonaArea"));
+				}
+				System.out.println("Commited");
+				return restaurante;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return restaurante;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return restaurante;
+		}		
+	}
+	
+	
+	public Restaurante getRestauranteFromCodigo(int codigoRestaurante) {
+		System.out.println("RestauranteDAO -> Start getRestauranteFromCodigo");
+		Restaurante restaurante = null;
+
+		try {
+
+			try {
+				String getRestaurante = "select * from restaurante where codigo=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getRestaurante);
+
+				preparedStatement.setInt(1, codigoRestaurante);
+
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				while (result.next()) {
+					restaurante = new Restaurante(result.getInt("codigo"), result.getString("nome"),
+							result.getString("email"), result.getInt("telefone"), result.getInt("codigoMorada"),
+							result.getInt("codigoArea"), result.getString("zonaArea"));
+
+				}
+				System.out.println("Commited");
+				return restaurante;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return restaurante;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return restaurante;
+		}
+	}
 
 	public static void main(String[] args) {
 		Restaurante restaurante = new Restaurante("Teste", "teste@gmail.com", 911039236, 2, 1700, "120");
@@ -406,7 +481,6 @@ public class RestauranteDAO implements DAO<Restaurante> {
 			System.out.println(ementas.get(i));
 		}
 		
-		System.out.println(restauranteDAO.getRecursoFromRestaurante(restaurante));
 
 	}
 

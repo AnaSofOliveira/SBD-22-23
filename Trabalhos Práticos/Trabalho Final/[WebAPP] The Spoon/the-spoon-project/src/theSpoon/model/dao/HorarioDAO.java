@@ -10,11 +10,11 @@ import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.Date;
 
+import theSpoon.model.database.DBConnection;
 import theSpoon.model.entities.DiaSemana;
 import theSpoon.model.entities.Ementa;
 import theSpoon.model.entities.Funcionario;
 import theSpoon.model.entities.Horario;
-import thsSpoon.model.database.DBConnection;
 
 public class HorarioDAO implements DAO<Horario>{
 	

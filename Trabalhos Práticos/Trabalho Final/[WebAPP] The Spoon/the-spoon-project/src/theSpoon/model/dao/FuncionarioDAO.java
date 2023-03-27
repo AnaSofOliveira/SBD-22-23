@@ -8,9 +8,10 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import theSpoon.model.database.DBConnection;
 import theSpoon.model.entities.Cliente;
 import theSpoon.model.entities.Funcionario;
-import thsSpoon.model.database.DBConnection;
+import theSpoon.model.entities.Utilizador;
 
 public class FuncionarioDAO implements DAO<Funcionario> {
 
@@ -268,6 +269,40 @@ public class FuncionarioDAO implements DAO<Funcionario> {
 
 	}
 
+	public Utilizador getUtilizadorFromFuncionario(Funcionario funcionario) {
+		System.out.println("FuncionarioDAO -> Start getUtilizadorFromFuncionario");
+		Utilizador utilizador = null;
+
+		try {
+
+			try {
+				String getMorada = "select * from utilizador as u "
+						+ "inner join funcionario as f on u.nif = f.nif and f.nif=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getMorada);
+
+				preparedStatement.setInt(1, funcionario.getNif());
+
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				while (result.next()) {
+					utilizador = new Utilizador(result.getInt("nif"), result.getString("nomeProprio"),
+							result.getString("apelido"), result.getInt("idade"));
+				}
+				System.out.println("Commited");
+				return utilizador;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return utilizador;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return utilizador;
+		}
+	}
+
 	public static void main(String[] args) {
 		Funcionario funcionario = new Funcionario(234503025, "Ana", "Oliveira", 28, 3, 3);
 		FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
@@ -288,8 +323,81 @@ public class FuncionarioDAO implements DAO<Funcionario> {
 		for (int i = 0; i < funcionarios.size(); i++) {
 			System.out.println(funcionarios.get(i));
 		}
-		
+
 		System.out.println(funcionarioDAO.delete(funcionario));
+	}
+
+	public Funcionario getFuncionarioFromUtilizador(Utilizador utilizador) {
+		System.out.println("FuncionarioDAO -> Start getFuncionarioFromUtilizador");
+		Funcionario funcionario = null;
+
+		try {
+
+			try {
+				String getCliente = "select * from funcionario as f"
+						+ " inner join utilizador as u on u.nif = f.nif and f.nif=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getCliente);
+
+				preparedStatement.setInt(1, utilizador.getNif());
+
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				while (result.next()) {
+					funcionario = new Funcionario(result.getInt("nif"), result.getString("nomeProprio"),
+							result.getString("apelido"), result.getInt("idade"),
+							result.getInt("chefe"), result.getInt("codigoRestaurante"));
+				}
+				System.out.println("Commited");
+				return funcionario;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return funcionario;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return funcionario;
+		}
+	}
+
+	public Funcionario getFuncionarioFromNIF(int nif) {
+		System.out.println("FuncionarioDAO -> Start getFuncionarioFromNIF");
+		Funcionario funcionario = null;
+
+		try {
+
+			try {
+				String getFuncionario = "select u.nif as nif, u.nomeProprio as nomeProprio, u.apelido as apelido, "
+						+ "u.idade as idade, f.numero as numero, f.chefe as numeroFuncionarioChefe, f.codigoRestaurante as codigoRestaurante "
+						+ " from funcionario as f" + " inner join utilizador as u on f.nif = u.nif "
+						+ "where f.nif = ?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getFuncionario);
+
+				preparedStatement.setInt(1, nif);
+
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				while (result.next()) {
+					funcionario = new Funcionario(result.getInt("nif"), result.getString("nomeProprio"),
+							result.getString("apelido"), result.getInt("idade"), result.getInt("numero"),
+							result.getInt("numeroFuncionarioChefe"), result.getInt("codigoRestaurante"));
+
+				}
+				System.out.println("Commited");
+				return funcionario;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return funcionario;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return funcionario;
+		}
 	}
 
 }

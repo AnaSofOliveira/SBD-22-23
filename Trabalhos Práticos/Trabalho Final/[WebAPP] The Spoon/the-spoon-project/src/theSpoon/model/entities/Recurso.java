@@ -8,6 +8,7 @@ public class Recurso {
 	private String nome;
 	private String extensao;
 	private String path;
+	private String imagemBase64;
 	
 	public Recurso(int id) {
 		super(); 
@@ -21,12 +22,13 @@ public class Recurso {
 		this.path = path;
 	}
 
-	public Recurso(int id, String nome, String extensao, String path) {
+	public Recurso(int id, String nome, String extensao, String path, String imagemBase64) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.extensao = extensao;
 		this.path = path;
+		this.imagemBase64 = imagemBase64;
 	}
 
 	public int getId() {
@@ -59,6 +61,16 @@ public class Recurso {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+	
+	
+
+	public String getImagemBase64() {
+		return imagemBase64;
+	}
+
+	public void setImagemBase64(String imagemBase64) {
+		this.imagemBase64 = imagemBase64;
 	}
 
 	@Override

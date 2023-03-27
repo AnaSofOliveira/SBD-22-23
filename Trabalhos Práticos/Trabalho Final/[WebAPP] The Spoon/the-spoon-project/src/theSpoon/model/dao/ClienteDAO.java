@@ -7,8 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import theSpoon.model.database.DBConnection;
 import theSpoon.model.entities.Cliente;
-import thsSpoon.model.database.DBConnection;
+import theSpoon.model.entities.Utilizador;
 
 public class ClienteDAO implements DAO<Cliente> {
 
@@ -37,22 +38,22 @@ public class ClienteDAO implements DAO<Cliente> {
 			if (result == 1) {
 				try {
 					String insertCliente;
-					if(entity.getDataUltimaVisita() != null) {
+					if (entity.getDataUltimaVisita() != null) {
 						insertCliente = "insert into cliente (nif, dataUltimaVisita, codigoMorada, codigoArea, zonaArea) values (?, ?, ?, ?, ?);";
-	
+
 						preparedStatement = connection.prepareStatement(insertCliente);
-	
+
 						preparedStatement.setInt(1, entity.getNif());
 						preparedStatement.setObject(2, entity.getDataUltimaVisita());
 						preparedStatement.setInt(3, entity.getCodigoMorada());
 						preparedStatement.setInt(4, entity.getCodigoArea());
 						preparedStatement.setString(5, entity.getZonaArea());
-					
-					}else {
+
+					} else {
 						insertCliente = "insert into cliente (nif, codigoMorada, codigoArea, zonaArea) values (?, ?, ?, ?);";
-						
+
 						preparedStatement = connection.prepareStatement(insertCliente);
-	
+
 						preparedStatement.setInt(1, entity.getNif());
 						preparedStatement.setInt(2, entity.getCodigoMorada());
 						preparedStatement.setInt(3, entity.getCodigoArea());
@@ -62,19 +63,20 @@ public class ClienteDAO implements DAO<Cliente> {
 					System.out.println(preparedStatement.toString());
 					result = preparedStatement.executeUpdate();
 
-					if(result == 1) {
+					if (result == 1) {
 						entity = get(entity);
 						connection.commit();
 
 						System.out.println("Commited");
 						return entity;
 					}
-					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 					return null;
 				}
-			}return null;
+			}
+			return null;
 
 		} catch (SQLException e) {
 			try {
@@ -114,22 +116,22 @@ public class ClienteDAO implements DAO<Cliente> {
 				if (result == 1) {
 					try {
 						String updateCliente;
-						if(entity.getDataUltimaVisita() != null) {
+						if (entity.getDataUltimaVisita() != null) {
 							updateCliente = "update cliente set dataUltimaVisita=?, codigoMorada=?, codigoArea=?, zonaArea=? where numero=?";
-		
+
 							preparedStatement = connection.prepareStatement(updateCliente);
-		
+
 							preparedStatement.setObject(1, entity.getDataUltimaVisita());
 							preparedStatement.setInt(2, entity.getCodigoMorada());
 							preparedStatement.setInt(3, entity.getCodigoArea());
 							preparedStatement.setString(4, entity.getZonaArea());
 							preparedStatement.setInt(5, entity.getNumero());
-						
-						}else {
+
+						} else {
 							updateCliente = "update cliente set codigoMorada=?, codigoArea=?, zonaArea=? where numero=?";
-							
+
 							preparedStatement = connection.prepareStatement(updateCliente);
-		
+
 							preparedStatement.setInt(1, entity.getCodigoMorada());
 							preparedStatement.setInt(2, entity.getCodigoArea());
 							preparedStatement.setString(3, entity.getZonaArea());
@@ -142,14 +144,15 @@ public class ClienteDAO implements DAO<Cliente> {
 						connection.commit();
 						connection.setAutoCommit(true);
 						System.out.println("Commited");
-						
+
 						return result == 1 ? entity : null;
-						
+
 					} catch (Exception e) {
 						e.printStackTrace();
 						return null;
 					}
-				}return null;
+				}
+				return null;
 			} catch (SQLException e) {
 				connection.rollback();
 				connection.setAutoCommit(true);
@@ -230,15 +233,15 @@ public class ClienteDAO implements DAO<Cliente> {
 
 					System.out.println(preparedStatement.toString());
 					result = preparedStatement.executeUpdate();
-					
 
 					connection.commit();
 					connection.setAutoCommit(true);
 					System.out.println("Commited");
-					
+
 					return (result == 1 ? true : false);
-				}return false;
-				
+				}
+				return false;
+
 			} catch (SQLException e) {
 				connection.rollback();
 				connection.setAutoCommit(true);
@@ -291,6 +294,41 @@ public class ClienteDAO implements DAO<Cliente> {
 
 	}
 
+	public Cliente getClienteFromUtilizador(Utilizador utilizador) {
+		System.out.println("ClienteDAO -> Start getClienteFromUtilizador");
+		Cliente cliente = null;
+
+		try {
+
+			try {
+				String getCliente = "select * from cliente as c " + 
+						"inner join utilizador as u on u.nif = c.nif and c.nif=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getCliente);
+
+				preparedStatement.setInt(1, utilizador.getNif());
+				
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				while (result.next()) {
+					cliente = new Cliente(result.getInt("nif"), result.getString("nomeProprio"),
+							result.getString("apelido"), result.getInt("idade"), result.getInt("numero"),
+							result.getInt("codigoMorada"), result.getInt("codigoArea"), result.getString("zonaArea"));
+				}
+				System.out.println("Commited");
+				return cliente;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return cliente;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return cliente;
+		}
+	}
+
 	public static void main(String[] args) {
 
 		Cliente cliente = new Cliente(234503025, "Ana", "Oliveira", 28, 100, null, 23, 2615, "359");
@@ -302,18 +340,53 @@ public class ClienteDAO implements DAO<Cliente> {
 		cliente.setIdade(53);
 		cliente.setDataUltimaVisita(new Date());
 		System.out.println("Update cliente: " + clienteDAO.update(cliente));
-		
 
 		System.out.println("Get cliente: " + clienteDAO.get(cliente));
-		
 
 		ArrayList<Cliente> clientes_2 = clienteDAO.listAll();
 		System.out.println(clientes_2);
 		for (int i = 0; i < clientes_2.size(); i++) {
 			System.out.println(clientes_2.get(i));
 		}
-		
+
 		System.out.println("Delete cliente: " + clienteDAO.get(cliente));
+	}
+
+	public Cliente getClienteFromNIF(int nif) {
+		System.out.println("ClienteDAO -> Start getClienteFromNIF");
+		Cliente cliente = null;
+
+		try {
+
+			try {
+				String getCliente = "select c.numero as numero, u.nif as nif, u.nomeProprio as nomeProprio, u.apelido as apelido, "
+						+ "u.idade as idade, c.dataUltimaVisita as dataUltimaVisita, c.codigoMorada as codigoMorada, c.codigoArea as codigoArea, "
+						+ "c.zonaArea as zonaArea from utilizador as u inner join cliente as c on c.nif = u.nif where u.nif=?; ";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getCliente);
+
+				preparedStatement.setInt(1, nif);
+
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				while (result.next()) {
+					cliente = new Cliente(result.getInt("nif"), result.getString("nomeProprio"),
+							result.getString("apelido"), result.getInt("idade"), result.getInt("numero"),
+							result.getInt("codigoMorada"), result.getInt("codigoArea"), result.getString("zonaArea"));
+
+				}
+				System.out.println("Commited");
+				return cliente;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return cliente;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return cliente;
+		}
 	}
 
 }

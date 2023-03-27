@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import theSpoon.model.database.DBConnection;
 import theSpoon.model.entities.AreaGeografica;
 import theSpoon.model.entities.Morada;
-import thsSpoon.model.database.DBConnection;
 
 public class MoradaDAO implements DAO<Morada> {
 
@@ -231,6 +231,43 @@ public class MoradaDAO implements DAO<Morada> {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return areaGeografica;
+		}
+	}
+	
+	public Morada findMoradaByDesignacao(String desginacao){
+		System.out.println("MoradaDAO -> Start getAreaGeograficaFromMorada");
+		Morada morada = null;
+
+		try {
+
+			try {
+				String getAreaGeografica = "select * from morada where designacao=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getAreaGeografica);
+
+				preparedStatement.setString(1, desginacao);
+				
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				while (result.next()) {
+					morada = new Morada(
+							result.getInt("codigo"), 
+							result.getInt("codigoPostal"), 
+							result.getString("zonaPostal"),
+							result.getString("designacao")); 
+					
+				}
+				System.out.println("Commited");
+				return morada;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return morada;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return morada;
 		}
 	}
 	

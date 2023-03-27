@@ -9,9 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import theSpoon.model.database.DBConnection;
 import theSpoon.model.entities.Mesa;
 import theSpoon.model.entities.Reserva;
-import thsSpoon.model.database.DBConnection;
 
 public class ReservaDAO implements DAO<Reserva> {
 
