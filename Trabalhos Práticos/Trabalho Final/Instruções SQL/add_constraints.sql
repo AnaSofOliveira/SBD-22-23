@@ -45,7 +45,7 @@ ALTER TABLE caracteristica MODIFY numero INT NOT NULL AUTO_INCREMENT;
 alter table caracteristicas_mesa add constraint pk_caracteristicas_mesa primary key(numeroCaracteristica, numeroMesa, codigoRestaurante);
 
 -- UTILIZADOR
-alter table utilizador add constraint pk_utilizador primary key (nif);
+alter table utilizador add constraint pk_utilizador primary key (nif); 
 
 -- CLIENTE
 alter table cliente add constraint pk_cliente primary key(numero); 

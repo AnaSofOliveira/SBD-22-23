@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import theSpoon.model.database.DBConnection;
 import theSpoon.model.entities.Item;
 import theSpoon.model.entities.Recurso;
 import theSpoon.model.entities.Restaurante;
 import theSpoon.model.entities.TipoItem;
-import thsSpoon.model.database.DBConnection;
 
 public class ItemDAO implements DAO<Item>{
 

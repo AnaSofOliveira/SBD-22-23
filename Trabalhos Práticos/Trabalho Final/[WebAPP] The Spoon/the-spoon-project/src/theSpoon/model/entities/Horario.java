@@ -10,6 +10,13 @@ public class Horario {
 	private int idEmenta;
 	private int codigoRestaurante;
 
+	public Horario(Date horaInicio, Date horaFim, DiaSemana diaSemana) {
+		super();
+		this.horaInicio = horaInicio;
+		this.horaFim = horaFim;
+		this.diaSemana = diaSemana;
+	}
+	
 	public Horario(Date horaInicio, Date horaFim, DiaSemana diaSemana, int idEmenta, int codigoRestaurante) {
 		super();
 		this.horaInicio = horaInicio;

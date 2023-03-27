@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import theSpoon.model.database.DBConnection;
 import theSpoon.model.entities.AreaGeografica;
 import theSpoon.model.entities.Caracteristica;
-import thsSpoon.model.database.DBConnection;
 
 public class CaracteristicaDAO implements DAO<Caracteristica> {
 

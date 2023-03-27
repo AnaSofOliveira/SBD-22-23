@@ -79,43 +79,43 @@ INSERT INTO restaurante (nome, email, telefone, codigoMorada, codigoArea, zonaAr
 	-- Recursos Restaurante "Elevador"
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('elevador', 'jpg', LOAD_FILE('../Uploads/restaurantes/1100 - Elevador/elevador.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('ameijoas', 'jpg',  LOAD_FILE('../Uploads/restaurantes/1100 - Elevador/itens/ameijoas.jpg'));
-	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('bife novilho', 'jpg',  LOAD_FILE('../Uploads/restaurantes/1100 - Elevador/itens/bife_novilho.jpg'));
-	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('bolo chocolate', 'jpg',  LOAD_FILE('../Uploads/restaurantes/1100 - Elevador/itens/bolo_de_chocolate.jpg'));
-	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('fruta epoca', 'jpg',  LOAD_FILE('../Uploads/restaurantes/1100 - Elevador/itens/fruta_da_epoca.jpg'));
-	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('caldeirada de marisco', 'jpg',  LOAD_FILE('../Uploads/restaurantes/1100 - Elevador/itens/caldeirada_de_marisco.jpg'));
+	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('bife_novilho', 'jpg',  LOAD_FILE('../Uploads/restaurantes/1100 - Elevador/itens/bife_novilho.jpg'));
+	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('bolo_chocolate', 'jpg',  LOAD_FILE('../Uploads/restaurantes/1100 - Elevador/itens/bolo_de_chocolate.jpg'));
+	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('fruta_epoca', 'jpg',  LOAD_FILE('../Uploads/restaurantes/1100 - Elevador/itens/fruta_da_epoca.jpg'));
+	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('caldeirada_de_marisco', 'jpg',  LOAD_FILE('../Uploads/restaurantes/1100 - Elevador/itens/caldeirada_de_marisco.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('queijo', 'jpg',  LOAD_FILE('../Uploads/restaurantes/1100 - Elevador/itens/queijo.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('salmão', 'jpg',  LOAD_FILE('../Uploads/restaurantes/1100 - Elevador/itens/salmao.jpg'));
 
 	-- Recursos Restaurante "Figus"
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('figus', 'jpg', LOAD_FILE('../Uploads/restaurantes/1100 - Figus/figus.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('ostras', 'jpg', LOAD_FILE('../Uploads/restaurantes/1100 - Figus/itens/ostras.jpg'));
-	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('peixe galo com rizzotto', 'jpg', LOAD_FILE('../Uploads/restaurantes/1100 - Figus/itens/peixe_galo_com_rizotto.jpg'));
-	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('peixinhos da horta', 'jpg', LOAD_FILE('../Uploads/restaurantes/1100 - Figus/itens/peixinhos_da_horta.jpg'));
+	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('peixe_galo_com_rizzotto', 'jpg', LOAD_FILE('../Uploads/restaurantes/1100 - Figus/itens/peixe_galo_com_rizotto.jpg'));
+	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('peixinhos_da_horta', 'jpg', LOAD_FILE('../Uploads/restaurantes/1100 - Figus/itens/peixinhos_da_horta.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('polvo', 'jpg', LOAD_FILE('../Uploads/restaurantes/1100 - Figus/itens/polvo.jpg'));
 
 	-- Recursos Restaurante "Pizza & Co"
-	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('pizza and co', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - Pizza & Co/pizza_co.jpg'));
+	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('pizza_and_co', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - Pizza & Co/pizza_co.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('camponesa', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - Pizza & Co/itens/camponesa.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('manjericão', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - Pizza & Co/itens/manjericao.jpg'));
-	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('morango e chocolate', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - Pizza & Co/itens/morango-e-chocolate.jpg'));
+	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('morango_e_chocolate', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - Pizza & Co/itens/morango-e-chocolate.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('peperoni', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - Pizza & Co/itens/peperoni.jpg'));
 
 	-- Recursos Restaurante "Taberna Londrina"
-	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('taberna londrina', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - taberna_londrina/taberna_londrina.jpg'));
+	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('taberna_londrina', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - taberna_londrina/taberna_londrina.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('cerveja', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - taberna_londrina/itens/cerveja.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('cheesecake', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - taberna_londrina/itens/cheesecake.jpg'));
-	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('folhados de alheira', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - taberna_londrina/itens/folhados_alheira.jpg'));
+	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('folhados_de_alheira', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - taberna_londrina/itens/folhados_alheira.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('francesinha', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - taberna_londrina/itens/francesinha.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('hamburguer', 'jpg', LOAD_FILE('../Uploads/restaurantes/1700 - taberna_londrina/itens/hamburguer.jpg'));
 
 	-- Recursos Restaurante "Carvão"
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('carvão', 'jpg', LOAD_FILE('../Uploads/restaurantes/2615 - Carvao/carvao.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('bacalhau', 'jpg', LOAD_FILE('../Uploads/restaurantes/2615 - Carvao/itens/bacalhau.jpg'));
-	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('perna de frango estufada', 'jpg', LOAD_FILE('../Uploads/restaurantes/2615 - Carvao/itens/perna-de-frango-estufada.jpg'));
+	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('perna_de_frango_estufada', 'jpg', LOAD_FILE('../Uploads/restaurantes/2615 - Carvao/itens/perna-de-frango-estufada.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('picanha', 'jpg', LOAD_FILE('../Uploads/restaurantes/2615 - Carvao/itens/picanha.jpg'));
 
 	-- Recursos Restaurante "Mar by Nunes"
-	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('mar by nunes', 'jpg', LOAD_FILE('../Uploads/restaurantes/2615 - Mar by Nunes/mar_by_nunes.jpg'));
+	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('mar_by_nunes', 'jpg', LOAD_FILE('../Uploads/restaurantes/2615 - Mar by Nunes/mar_by_nunes.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('maminha', 'jpg', LOAD_FILE('../Uploads/restaurantes/2615 - Mar by Nunes/itens/maminha.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('mariscada', 'jpg', LOAD_FILE('../Uploads/restaurantes/2615 - Mar by Nunes/itens/mariscada.jpg'));
 	INSERT INTO recurso_multimedia (nome, extensao, conteudo) VALUES ('ostras', 'jpg', LOAD_FILE('../Uploads/restaurantes/2615 - Mar by Nunes/itens/ostras.jpg'));

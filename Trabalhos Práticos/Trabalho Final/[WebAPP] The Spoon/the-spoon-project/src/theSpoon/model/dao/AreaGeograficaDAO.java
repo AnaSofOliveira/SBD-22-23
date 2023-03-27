@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import theSpoon.controller.controller;
+import theSpoon.model.database.DBConnection;
 import theSpoon.model.entities.AreaGeografica;
 import theSpoon.model.entities.Morada;
-import thsSpoon.model.database.DBConnection;
 
 public class AreaGeograficaDAO implements DAO<AreaGeografica> {
 
@@ -201,6 +201,40 @@ public class AreaGeograficaDAO implements DAO<AreaGeografica> {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return areasGeograficas;
+		}
+	}
+	
+	public AreaGeografica getAreaGeograficaByCodigoPostal(int codigoPostal, String zonaPostal) {
+		System.out.println("AreaGeograficaDAO -> Start getAreaGeograficaByCodigoPostal");
+		AreaGeografica areaGeografica = null;
+
+		try {
+
+			try {
+				String getAreaGeografica = "select * from area_geografica where codigoPostal=? and zonaPostal=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getAreaGeografica);
+
+				preparedStatement.setInt(1, codigoPostal);
+				preparedStatement.setString(2, zonaPostal);
+				
+				System.out.println("=> Instrução SQL: " + preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				while (result.next()) {
+					areaGeografica = new AreaGeografica(result.getInt("codigoPostal"), result.getString("zonaPostal"),
+							result.getString("freguesia"), result.getString("concelho"), result.getString("distrito"));
+				}
+				System.out.println("Commited");
+				return areaGeografica;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return areaGeografica;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return areaGeografica;
 		}
 	}
 
