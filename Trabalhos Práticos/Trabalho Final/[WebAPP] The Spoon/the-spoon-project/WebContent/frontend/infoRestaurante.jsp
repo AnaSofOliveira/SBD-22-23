@@ -17,47 +17,62 @@
 		</div>
 
 		<div class="col-5">
-				<h2>Contatos</h2>
-				<p>E-mail: ${restautante.email}</p>
-				<p>Telefone: ${restaurante.telefone}</p>
-			
+			<h2>Contatos</h2>
+			<p>E-mail: ${restaurante.email}</p>
+			<p>Telefone: ${restaurante.telefone}</p>
+
 			<br>
-				<h2>Horários</h2>
+			<h2>Horários</h2>
 
-				<table class="table table-hover">
+			<table class="table table-hover">
+				<tr>
+					<th scope="col">Dia Semana</th>
+					<th scope="col">Abertura</th>
+					<th scope="col">Fecho</th>
+				</tr>
+
+				<c:forEach var="horario" items="${horarios}">
 					<tr>
-						<th scope="col">Dia Semana</th>
-						<th scope="col">Abertura</th>
-						<th scope="col">Fecho</th>
+						<td>${horario.diaSemana }</td>
+						<td>${horario.horaInicio }</td>
+						<td>${horario.horaFim }</td>
 					</tr>
-
-					<c:forEach var="horario" items="${horarios}">
-						<tr>
-							<td>${horario.diaSemana }</td>
-							<td>${horario.horaInicio }</td>
-							<td>${horario.horaFim }</td>
-						</tr>
-					</c:forEach>
-				</table>
+				</c:forEach>
+			</table>
 		</div>
 
 	</div>
 </div>
 
-<div class="container-fluid">
-
-<div class="row justify-content-md-center">
-	<div class="col-4">
-		<button type="button" class="btn btn-outline-success" value='reservar'>
-		<a href="./ReservaServlet?codigoRestaurante=${restaurante.codigo}">Realizar reserva</a>
-</button>
+<!-- Se Tipo User Cliente -->
+<c:if test="${tipo == 'cliente'}">
+	<div class="container-fluid">
+		<!-- Opções de reserva -->
+		<div class="row justify-content-md-center">
+		<a href="./IniciarReservaServlet?codigo=${restaurante.codigo}">
+					<button type="submit" class="btn btn-outline-success" id='iniciarReserva'
+						value='iniciarReserva'>Reservar</button>
+			</a>
+		
+			<div class="col-4">
+				
+			</div>
+		</div>
 	</div>
-</div>
-</div>
+</c:if>
 
-<!-- Opções Reservas -->
 
-<!-- Listar Reservas -->
+<!-- Opções de gestão -->
+<!-- Se Tipo User Funcionario -->
+<c:if test="${user == 'funcionario'}">
+	<div class="container-fluid">
+		<!-- Lista reservas Pendentes -->
+
+
+		<!-- Lista reservas Aceites -->
+
+	</div>
+</c:if>
 
 <!-- FOOTER -->
 <%@include file='../footer.jsp'%>

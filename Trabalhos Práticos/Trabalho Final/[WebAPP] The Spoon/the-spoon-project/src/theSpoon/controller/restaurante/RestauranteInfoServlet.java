@@ -36,7 +36,6 @@ public class RestauranteInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("request.getParameter(\"codigo\"): " + request.getParameter("codigo"));
 		int codigoRestaurante = Integer.parseInt(request.getParameter("codigo"));
 
 		Restaurante restaurante = new RestauranteDAO().getRestauranteFromCodigo(codigoRestaurante);

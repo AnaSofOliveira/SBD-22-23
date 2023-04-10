@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import theSpoon.model.database.DBConnection;
 import theSpoon.model.entities.Ementa;
 import theSpoon.model.entities.Item;
+import theSpoon.model.entities.Restaurante;
 import theSpoon.model.entities.TipoItem;
 
 public class EmentaDAO implements DAO<Ementa> {
@@ -232,6 +234,52 @@ public class EmentaDAO implements DAO<Ementa> {
 		}
 	}
 
+	public Ementa getEmentaInTime(Restaurante restaurante, String diaSemana, String time) {
+		System.out.println("EmentaDAO -> Start getEmentaInTime");
+		
+		System.out.println(time);
+					
+
+		Ementa ementa = null;
+		try {
+
+			try {
+				String getEmenta = "select * from ementa as e " + 
+						"inner join horario as h on e.id = h.idEmenta and h.codigoRestaurante=? and h.horaInicio<? and h.horaFim>? and h.diaSemana=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getEmenta);
+
+				preparedStatement.setInt(1, restaurante.getCodigo());
+				preparedStatement.setString(2, time);
+				preparedStatement.setString(3, time);
+				preparedStatement.setString(4, diaSemana);
+				
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				while (result.next()) {
+					ementa = new Ementa(result.getInt("id"), result.getInt("codigoRestaurante"),
+							result.getString("designacao"));
+				}
+				System.out.println("Commited");
+				return ementa;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return ementa;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return ementa;
+		}
+		
+		
+		
+		
+		
+		// TODO To be implemented
+	}
+	
 	public static void main(String[] args) {
 		EmentaDAO ementaDAO = new EmentaDAO();
 

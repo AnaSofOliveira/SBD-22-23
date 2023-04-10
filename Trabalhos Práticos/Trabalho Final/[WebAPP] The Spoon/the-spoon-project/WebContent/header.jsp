@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>The Spoon</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
@@ -14,9 +14,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -31,9 +29,9 @@
 	<nav class="navbar navbar-light bg-light">
 		<!-- Logo -->
 		<a class="navbar-brand" href="${pageContext.request.contextPath}"> <img
-			src="${pageContext.request.contextPath}/WebContent/imgs/spoon.png"
+			src="${pageContext.request.contextPath}/imgs/spoon.png"
 			width="30" height="30" class="d-inline-block align-top" alt="">
-			Bootstrap
+			The Spoon
 		</a>
 
 
@@ -48,7 +46,7 @@
 		<div>
 			<c:if test="${user == null}">
 				<button type="button" class="btn btn-outline-success" value='signIn'>
-					<a href="./login.jsp">Iniciar Sessão</a>
+					<a href="./login.jsp">Iniciar SessÃ£o</a>
 				</button>
 				<button type="button" class="btn btn-success" value="register">
 					<a href="./registar.jsp">Registar</a>

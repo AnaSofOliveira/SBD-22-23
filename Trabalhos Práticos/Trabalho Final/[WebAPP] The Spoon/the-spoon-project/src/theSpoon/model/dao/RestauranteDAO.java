@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import theSpoon.model.database.DBConnection;
+import theSpoon.model.entities.Caracteristica;
 import theSpoon.model.entities.DiaSemana;
 import theSpoon.model.entities.Ementa;
 import theSpoon.model.entities.Horario;
@@ -482,6 +483,45 @@ public class RestauranteDAO implements DAO<Restaurante> {
 		}
 		
 
+	}
+
+	public ArrayList<Caracteristica> getCaracteristicas(int codigoRestaurante) {
+		System.out.println("RestauranteDAO -> Start getCaracteristicas");
+		ArrayList<Caracteristica> caracteristicas = new ArrayList<>();
+
+		try {
+
+			try {
+				String getHorarios = "select * from caracteristica as c" + 
+						" inner join caracteristicas_mesa as cm on c.numero = cm.numeroCaracteristica and cm.codigoRestaurante=?" + 
+						" group by c.caracteristica;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getHorarios);
+
+				preparedStatement.setInt(1, codigoRestaurante);
+
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				Caracteristica caracteristica = null;
+				while (result.next()) {
+					caracteristica = new Caracteristica(
+							result.getInt("numero"), 
+							result.getString("caracteristica")); 
+					caracteristicas.add(caracteristica);
+
+				}
+				System.out.println("Commited");
+				return caracteristicas;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return caracteristicas;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return caracteristicas;
+		}
 	}
 
 }

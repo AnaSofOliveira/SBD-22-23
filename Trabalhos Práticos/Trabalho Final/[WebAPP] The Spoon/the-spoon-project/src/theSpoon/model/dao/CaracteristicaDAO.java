@@ -27,7 +27,7 @@ public class CaracteristicaDAO implements DAO<Caracteristica> {
 
 			preparedStatement.setString(1, entity.getCaracteristica());
 
-			System.out.println("=> Instrução SQL: " + preparedStatement.toString());
+			System.out.println("=> Instruï¿½ï¿½o SQL: " + preparedStatement.toString());
 			int result = preparedStatement.executeUpdate();
 
 			if(result == 1) {
@@ -68,7 +68,7 @@ public class CaracteristicaDAO implements DAO<Caracteristica> {
 				preparedStatement.setString(1, entity.getCaracteristica());
 				preparedStatement.setInt(2, entity.getNumero());
 
-				System.out.println("=> Instrução SQL: " + preparedStatement.toString());
+				System.out.println("=> Instruï¿½ï¿½o SQL: " + preparedStatement.toString());
 				int result = preparedStatement.executeUpdate();
 
 				connection.commit();
@@ -105,7 +105,7 @@ public class CaracteristicaDAO implements DAO<Caracteristica> {
 
 				preparedStatement.setString(1, entity.getCaracteristica());
 
-				System.out.println("=> Instrução SQL: " + preparedStatement.toString());
+				System.out.println("=> Instruï¿½ï¿½o SQL: " + preparedStatement.toString());
 				ResultSet result = preparedStatement.executeQuery();
 
 				while (result.next()) {
@@ -138,7 +138,7 @@ public class CaracteristicaDAO implements DAO<Caracteristica> {
 
 				preparedStatement.setInt(1, entity.getNumero());
 
-				System.out.println("=> Instrução SQL: " + preparedStatement.toString());
+				System.out.println("=> Instruï¿½ï¿½o SQL: " + preparedStatement.toString());
 				int result = preparedStatement.executeUpdate();
 
 				connection.commit();
@@ -170,7 +170,7 @@ public class CaracteristicaDAO implements DAO<Caracteristica> {
 
 				PreparedStatement preparedStatement = connection.prepareStatement(getAreaGeografica);
 
-				System.out.println("=> Instrução SQL: " + preparedStatement.toString());
+				System.out.println("=> Instruï¿½ï¿½o SQL: " + preparedStatement.toString());
 				ResultSet result = preparedStatement.executeQuery();
 
 				Caracteristica caracteristica = null;
@@ -210,6 +210,39 @@ public class CaracteristicaDAO implements DAO<Caracteristica> {
 
 		for (Caracteristica ar : caract) {
 			System.out.println(ar);
+		}
+	}
+
+	public Caracteristica getCaracteristicaFromNumero(int idCaracteristica) {
+		System.out.println("CaracteristicaDAO -> Start getCaracteristicaFromId");
+
+		Caracteristica caracteristica = null;
+
+		try {
+
+			try {
+				String getCaracteristica = "select * from caracteristica where numero=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getCaracteristica);
+
+				preparedStatement.setInt(1, idCaracteristica);
+
+				System.out.println("=> Instruï¿½ï¿½o SQL: " + preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				while (result.next()) {
+					caracteristica = new Caracteristica(result.getInt("numero"), result.getString("caracteristica"));
+				}
+				System.out.println("Commited");
+				return caracteristica;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return caracteristica;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return caracteristica;
 		}
 	}
 

@@ -8,8 +8,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 import theSpoon.model.database.DBConnection;
+import theSpoon.model.entities.Caracteristica;
+import theSpoon.model.entities.Item;
 import theSpoon.model.entities.Mesa;
 import theSpoon.model.entities.Reserva;
 
@@ -229,6 +232,76 @@ public class ReservaDAO implements DAO<Reserva> {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+
+	}
+
+	public void addItensReserva(Reserva reserva, Map<Item, Integer> itensEscolhidos) {
+		System.out.println("ReservaDAO -> Start addItensReserva");
+
+		for (Map.Entry<Item, Integer> item : itensEscolhidos.entrySet()) {
+
+			try {
+				connection.setAutoCommit(false);
+
+				String insertReserva = "insert into item_reserva (numeroReserva, codigoRestaurante, idItem, quantidade) values (?, ?, ?, ?)";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(insertReserva);
+
+				preparedStatement.setInt(1, reserva.getNumero());
+				preparedStatement.setObject(2, reserva.getCodigoRestaurante());
+				preparedStatement.setInt(3, item.getKey().getId());
+				preparedStatement.setInt(4, item.getValue());
+
+				System.out.println(preparedStatement.toString());
+				int result = preparedStatement.executeUpdate();
+
+				System.out.println("Commited");
+
+			} catch (SQLException e) {
+				try {
+					connection.rollback();
+					connection.setAutoCommit(true);
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+				System.out.println(e.getMessage());
+			}
+
+		}
+	}
+
+	public void addCaracteristicasReserva(Reserva reserva, ArrayList<Caracteristica> caracteristicasEscolhidas) {
+		System.out.println("ReservaDAO -> Start addCaracteristicasReserva");
+
+		for (Caracteristica caracteristica : caracteristicasEscolhidas) {
+
+			try {
+				connection.setAutoCommit(false);
+
+				String insertReserva = "insert into caracteristicas_reserva (numeroReserva, codigoRestaurante, numeroCaracteristica) values (?, ?, ?)";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(insertReserva);
+
+				preparedStatement.setInt(1, reserva.getNumero());
+				preparedStatement.setObject(2, reserva.getCodigoRestaurante());
+				preparedStatement.setInt(3, caracteristica.getNumero());
+
+				System.out.println(preparedStatement.toString());
+				int result = preparedStatement.executeUpdate();
+
+				System.out.println("Commited");
+
+			} catch (SQLException e) {
+				try {
+					connection.rollback();
+					connection.setAutoCommit(true);
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+				System.out.println(e.getMessage());
+			}
+
 		}
 
 	}

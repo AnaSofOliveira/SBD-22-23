@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import theSpoon.model.database.DBConnection;
+import theSpoon.model.entities.Ementa;
 import theSpoon.model.entities.Item;
 import theSpoon.model.entities.Recurso;
 import theSpoon.model.entities.Restaurante;
@@ -194,7 +195,7 @@ public class ItemDAO implements DAO<Item>{
 		}
 	}
 	
-	public Recurso getRecursosFromItem(Item item) {
+	public Recurso getRecursoFromItem(Item item) {
 		System.out.println("ItemDAO -> Start getRecursosFromItem");
 		Recurso recurso = null;
 		try {
@@ -234,7 +235,7 @@ public class ItemDAO implements DAO<Item>{
 		ItemDAO itemDAO = new ItemDAO();
 
 		Item item = new Item("Teste", TipoItem.prato, 3); 
-		item.setDescricao("Isto é um texto de exemplo");
+		item.setDescricao("Isto ï¿½ um texto de exemplo");
 
 		itemDAO.create(item);
 
@@ -245,10 +246,79 @@ public class ItemDAO implements DAO<Item>{
 
 		for (Item i : itens) {
 			System.out.println(i);
-			System.out.println(itemDAO.getRecursosFromItem(i) + "\n");
+			System.out.println(itemDAO.getRecursoFromItem(i) + "\n");
 		}
 
 		itemDAO.delete(item);
+	}
+
+	public ArrayList<Item> getItensFromEmenta(Ementa ementa) {
+		System.out.println("ItemDAO -> Start getItensFromEmenta");
+		ArrayList<Item> itens = new ArrayList<>();
+
+		try {
+
+			try {
+				String getItem = "select * from item as i " + 
+						"inner join item_ementa as ie on i.id = ie.idItem and ie.idEmenta=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getItem);
+
+				preparedStatement.setInt(1, ementa.getId());
+				
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+				
+				Item item = null;
+				while (result.next()) {
+					item = new Item(result.getInt("id"), result.getString("designacao"), result.getString("descricao"), 
+							TipoItem.valueOf(result.getString("tipo")), result.getInt("idRecurso"));
+					itens.add(item);
+				}
+				System.out.println("Commited");
+				return itens;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return itens;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return itens;
+		}
+	}
+
+	public Item getItemFromId(int idItem) {
+		System.out.println("ItemDAO -> Start getItemFromId");
+
+		Item item = null;
+		try {
+
+			try {
+				String getItem = "select * from item where id=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getItem);
+
+				preparedStatement.setInt(1, idItem);
+
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				while (result.next()) {
+					item = new Item(result.getInt("id"), result.getString("designacao"), result.getString("descricao"), 
+							TipoItem.valueOf(result.getString("tipo")), result.getInt("idRecurso"));
+				}
+				System.out.println("Commited");
+				return item;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return item;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return item;
+		}
 	}
 
 }
