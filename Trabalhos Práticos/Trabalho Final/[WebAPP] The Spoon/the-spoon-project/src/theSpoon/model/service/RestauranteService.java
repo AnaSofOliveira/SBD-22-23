@@ -61,11 +61,11 @@ public class RestauranteService {
 			if (rest != null) {
 				mensagem = "Restaurante adicionado";
 			} else {
-				mensagem = "Nï¿½o foi possï¿½vel adicionar o restaurante";
+				mensagem = "Não foi possível adicionar o restaurante";
 			}
 
 		} else {
-			mensagem = "Nï¿½o foi possï¿½vel adicionar o restaurante";
+			mensagem = "Não foi possï¿½vel adicionar o restaurante";
 		}
 		listarRestaurantes(mensagem);
 	}

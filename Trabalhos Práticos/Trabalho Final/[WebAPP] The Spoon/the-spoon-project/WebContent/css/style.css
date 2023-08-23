@@ -1,4 +1,4 @@
-@charset "ISO-8859-1";
+/* @charset "ISO-8859-1"; */
 
 html{
 	color: #000;
@@ -11,4 +11,12 @@ body{
 .restaurant-list{
 	background: aqua;
 	
+}
+
+/* Páginas de confirmação ou erro na reserva */
+.jumbotron.error{
+	background-color: #FFCCCB;
+}
+.jumbotron.success{
+	background-color: #CCFFCD:
 }

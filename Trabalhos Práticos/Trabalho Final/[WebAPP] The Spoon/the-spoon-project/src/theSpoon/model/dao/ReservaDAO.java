@@ -109,11 +109,11 @@ public class ReservaDAO implements DAO<Reserva> {
 		try {
 
 			try {
-				String getReserva = "select * from reserva where numero=? and codigoRestaurante=? and numeroCliente=?;";
+				String getReserva = "select * from reserva where dataHoraMarcacao=? and codigoRestaurante=? and numeroCliente=?;";
 
 				PreparedStatement preparedStatement = connection.prepareStatement(getReserva);
 
-				preparedStatement.setInt(1, entity.getNumero());
+				preparedStatement.setObject(1, entity.getDataMarcacao());
 				preparedStatement.setInt(2, entity.getCodigoRestaurante());
 				preparedStatement.setInt(3, entity.getNumeroCliente());
 
@@ -213,7 +213,7 @@ public class ReservaDAO implements DAO<Reserva> {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Reserva reserva;
-		try {
+		/*try {
 			reserva = new Reserva(4, sdf.parse("10/03/2023 20:00"), 4, 20, new Date());
 
 			System.out.println(reservaDAO.create(reserva));
@@ -232,12 +232,15 @@ public class ReservaDAO implements DAO<Reserva> {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 	}
 
 	public void addItensReserva(Reserva reserva, Map<Item, Integer> itensEscolhidos) {
 		System.out.println("ReservaDAO -> Start addItensReserva");
+		
+		System.out.println("Reserva: " + reserva);
+		System.out.println("Itens Escolhidos: " + itensEscolhidos);
 
 		for (Map.Entry<Item, Integer> item : itensEscolhidos.entrySet()) {
 
@@ -290,8 +293,12 @@ public class ReservaDAO implements DAO<Reserva> {
 				System.out.println(preparedStatement.toString());
 				int result = preparedStatement.executeUpdate();
 
-				System.out.println("Commited");
+				if (result == 1) {
+					connection.commit();
 
+					System.out.println("Commited");
+				}
+				
 			} catch (SQLException e) {
 				try {
 					connection.rollback();

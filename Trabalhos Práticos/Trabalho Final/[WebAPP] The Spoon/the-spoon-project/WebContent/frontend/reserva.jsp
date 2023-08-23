@@ -3,6 +3,7 @@
 <!-- Informações da reserva -->
 <div class="container-fluid">
 	<form id='reserva'>
+		<!-- action='./RealizarReservaServlet' method='POST' -->
 		<input type='hidden' id="codigoRestaurante" name="codigoRestaurante"
 			value='${restaurante }'>
 
@@ -47,7 +48,8 @@
 				<div class="form-check">
 					<input type="checkbox" class="form-check-input"
 						id="escolherCaracteristicas" name="escolherCaracteristicas">
-					<label class="form-check-label" for="escolherCaracteristicas">Escolher Caracteristicas</label>
+					<label class="form-check-label" for="escolherCaracteristicas">Escolher
+						Caracteristicas</label>
 				</div>
 
 			</div>
@@ -55,7 +57,7 @@
 				<div id="listaCaracteristicas"></div>
 			</div>
 		</fieldset>
-		<button type="submit" class="btn btn-success">Reservar</button>
+		<button type="button" class="btn btn-success botaoReservar">Reservar</button>
 	</form>
 </div>
 
@@ -70,7 +72,7 @@ $(document).ready(function(){
 }); 
 
 
-$("#reserva").submit(function(){
+$(".botaoReservar").on("click", function(){
 
 	
 	console.log("Entrei aqui!");
@@ -115,6 +117,14 @@ $("#reserva").submit(function(){
 			escolherCaracteristicas: escolherCaracteristicas, 
 			listaCaracteristicas: caracteriticasReservadas, 
 			dataHoraReserva: new Date().toISOString()		
+		}, 
+		complete: function(){
+			window.location.href = "./frontend/sucesso_reserva.jsp"	
+			console.log("Vou redirecionar para a página de sucesso"); 
+		}, 
+		error: function(){
+			window.location.href = "./frontend/erro_reserva.jsp"	
+			console.log("Vou redirecionar para a página de erro"); 
 		}
 	});
 

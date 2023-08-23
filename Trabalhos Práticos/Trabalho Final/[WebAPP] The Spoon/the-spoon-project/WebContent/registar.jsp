@@ -38,7 +38,7 @@
 					name="apelido" type="text" class="form-control" id="apelido"
 					placeholder="Insira o seu primeiro Apelido">
 					
-					<label for="idade">Apelido:</label> <input
+					<label for="idade">Idade:</label> <input
 					name="idade" type="text" class="form-control" id="idade"
 					placeholder="Insira a sua idade">
 					

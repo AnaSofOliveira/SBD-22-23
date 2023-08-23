@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>The Spoon</title>
+<link rel="stylesheet" href="/WebContent/css/style.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
 <link rel="stylesheet"
@@ -29,7 +30,7 @@
 	<nav class="navbar navbar-light bg-light">
 		<!-- Logo -->
 		<a class="navbar-brand" href="${pageContext.request.contextPath}"> <img
-			src="${pageContext.request.contextPath}/imgs/spoon.png"
+			src="${pageContext.request.contextPath}/WebContent/imgs/spoon.png"
 			width="30" height="30" class="d-inline-block align-top" alt="">
 			The Spoon
 		</a>
@@ -43,21 +44,28 @@
 
 
 		<!-- Logged Info -->
-		<div>
+		<div class='form-inline my-2 my-lg-0'>
 			<c:if test="${user == null}">
-				<button type="button" class="btn btn-outline-success" value='signIn'>
+				<a class="nav-link btn btn-success text-white" href="./login.jsp">Iniciar Sessão</a>
+				<a class="nav-link" href="./registar.jsp">Registar</a>
+				
+				
+				<!-- <button type="button" class="btn btn-outline-success" value='signIn'>
 					<a href="./login.jsp">Iniciar Sessão</a>
 				</button>
 				<button type="button" class="btn btn-success" value="register">
 					<a href="./registar.jsp">Registar</a>
-				</button>
+				</button>-->
 			</c:if>
 
 			<c:if test="${user != null}">
-				<a href="./AbrirPerfilServlet">Welcome, ${user.nomeProprio}</a>
+				<a class="nav-link btn btn-success text-white" href="./AbrirPerfilServlet">Bem-Vindo, ${user.nomeProprio}</a>
+				<a class="nav-link" href="${pageContext.request.contextPath}/logoutServlet">Terminar Sessao</a>
+				
+				<!-- <a href="./AbrirPerfilServlet">Welcome, ${user.nomeProprio}</a>
 				<button type="button" class="btn btn-outline-success" value='logout'>
 					<a href="${pageContext.request.contextPath}/logoutServlet">Logout</a>
-				</button>
+				</button> -->
 			</c:if>
 		</div>
 
