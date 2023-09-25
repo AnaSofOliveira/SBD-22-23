@@ -29,6 +29,6 @@ Os funcionários do restaurante conseguem confirmar e cancelar as reservas efect
 
 ## Interface Gráfica
 
-![The Spoon](/Trabalhos Práticos/Trabalho Final/imagens/the_spoon.png)
+![TheSpoon](./Trabalhos_Práticos/Trabalho_Final/images/the_spoon.png)
 
 
