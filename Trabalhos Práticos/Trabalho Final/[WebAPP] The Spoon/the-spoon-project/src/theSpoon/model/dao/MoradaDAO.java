@@ -8,7 +8,10 @@ import java.util.ArrayList;
 
 import theSpoon.model.database.DBConnection;
 import theSpoon.model.entities.AreaGeografica;
+import theSpoon.model.entities.Cliente;
 import theSpoon.model.entities.Morada;
+import theSpoon.model.entities.Restaurante;
+import theSpoon.model.entities.Utilizador;
 
 public class MoradaDAO implements DAO<Morada> {
 
@@ -292,6 +295,50 @@ public class MoradaDAO implements DAO<Morada> {
 
 		  moradaDAO.delete(morada);
 				
+	}
+
+	public Morada getMoradaFromRestaurante(Restaurante restaurante) {
+		Morada morada = new Morada(restaurante.getCodigoMorada(), restaurante.getCodigoArea(), restaurante.getZonaArea()); 
+		return this.get(morada); 
+	}
+
+	public Morada getMoradaFromCliente(Cliente cliente) {
+		Morada morada = new Morada(cliente.getCodigoMorada(), cliente.getCodigoArea(), cliente.getZonaArea()); 
+		return this.get(morada);
+	}
+
+	public Morada getMoradaFromDesignacao(String designacao) {
+		System.out.println("MoradaDAO -> Start getMoradaFromDesignacao");
+		Morada morada = null;
+
+		try {
+
+			try {
+				String getMorada = "select * from morada where designacao=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getMorada);
+
+				preparedStatement.setString(1, designacao);
+
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+				
+				while (result.next()) {
+					morada = new Morada(result.getInt("codigo"), result.getInt("codigoPostal"),
+							result.getString("zonaPostal"), result.getString("designacao"));
+
+				}
+				System.out.println("Commited");
+				return morada;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return morada;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return morada;
+		}
 	}
 
 }

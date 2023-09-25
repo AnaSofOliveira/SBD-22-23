@@ -1,5 +1,6 @@
 package theSpoon.model.service;
 
+import java.awt.image.RescaleOp;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -18,6 +19,7 @@ import theSpoon.model.dao.RecursoDAO;
 import theSpoon.model.dao.RestauranteDAO;
 import theSpoon.model.entities.AreaGeografica;
 import theSpoon.model.entities.Caracteristica;
+import theSpoon.model.entities.Horario;
 import theSpoon.model.entities.Morada;
 import theSpoon.model.entities.Recurso;
 import theSpoon.model.entities.Restaurante;
@@ -61,11 +63,11 @@ public class RestauranteService {
 			if (rest != null) {
 				mensagem = "Restaurante adicionado";
 			} else {
-				mensagem = "Não foi possível adicionar o restaurante";
+				mensagem = "NÃ£o foi possÃ­vel adicionar o restaurante";
 			}
 
 		} else {
-			mensagem = "Não foi possï¿½vel adicionar o restaurante";
+			mensagem = "NÃ£o foi possÃ­vel adicionar o restaurante";
 		}
 		listarRestaurantes(mensagem);
 	}
@@ -87,10 +89,9 @@ public class RestauranteService {
 		try {
 			request.getRequestDispatcher("./listar_restaurantes.jsp").include(request, response);
 		} catch (ServletException | IOException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
-
 
 	public void getCaracteristicasFromRestaurante() {
 		try {
@@ -99,17 +100,77 @@ public class RestauranteService {
 			RestauranteDAO restauranteDAO = new RestauranteDAO();
 
 			Map<String, Object> caracteristicas = new HashMap<String, Object>();
-			caracteristicas.put("caracteristicas", restauranteDAO.getCaracteristicas(codigoRestaurante)); 
-			
+			caracteristicas.put("caracteristicas", restauranteDAO.getCaracteristicas(codigoRestaurante));
+
 			response.setContentType("application/json");
 
 			PrintWriter out = response.getWriter();
 			out.print(new Gson().toJson(caracteristicas));
-			
+
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 
+	}
+
+	public Restaurante getRestaurante() {
+		int codigoRestaurante = Integer.parseInt(request.getParameter("codigoRestaurante"));
+
+		Restaurante restaurante = new RestauranteDAO().get(new Restaurante(codigoRestaurante));
+
+		return restaurante;
+
+	}
+
+	public void listarRestaurantesByName() {
+		try {
+
+			String pesquisa = this.request.getParameter("termo");
+
+			ArrayList<Restaurante> restaurantes = this.restauranteDAO.listAll();
+			ArrayList<Recurso> recursos = new ArrayList<>();
+
+			ArrayList<Restaurante> restaurantesEncontrados = new ArrayList<Restaurante>();
+			for (Restaurante restaurante : restaurantes) {
+				String nome = restaurante.getNome().toLowerCase();
+				String term = pesquisa.toLowerCase();
+
+				if (term.equals("")) {
+					restaurantesEncontrados = new ArrayList<>();
+					recursos = new ArrayList<>();
+				} else {
+					System.out.println(nome + " " + term);
+					if (nome.contains(term)) {
+						RecursoDAO recursoDAO = new RecursoDAO();
+						Recurso recurso = recursoDAO.getRecursoFromRestaurante(restaurante);
+
+						restaurantesEncontrados.add(restaurante);
+						recursos.add(recurso);
+					}
+				}
+			}
+			Map<String, Object> resultado = new HashMap<String, Object>();
+			resultado.put("restaurantes", restaurantesEncontrados);
+			resultado.put("recursos", recursos);
+
+			response.setContentType("application/json");
+
+			PrintWriter out = response.getWriter();
+			out.print(new Gson().toJson(resultado));
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public Restaurante getRestauranteFromCodigo(int codigoRestaurante) {
+		Restaurante restaurante = this.restauranteDAO.getRestauranteFromCodigo(codigoRestaurante);
+		return restaurante;
+	}
+
+	public ArrayList<Horario> getHorariosFromRestaurante(Restaurante restaurante) {
+		ArrayList<Horario> horarios = this.restauranteDAO.getHorariosFromRestaurante(restaurante);
+		
+		return horarios;
 	}
 
 }

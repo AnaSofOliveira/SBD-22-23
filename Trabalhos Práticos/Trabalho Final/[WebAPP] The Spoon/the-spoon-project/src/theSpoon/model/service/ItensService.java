@@ -2,6 +2,7 @@ package theSpoon.model.service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.Normalizer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -39,22 +40,26 @@ public class ItensService {
 	public void obterItensServidos() {
 
 		int codigoRestaurante = Integer.parseInt(request.getParameter("codigoRestaurante"));
-		String data = request.getParameter("dataReserva");
-		System.out.println(data);
+		long dataHoraMarcacao = Long.parseLong(this.request.getParameter("dataHoraMarcacao"));
 		Restaurante restautante = new RestauranteDAO().getRestauranteFromCodigo(codigoRestaurante);
 
 		try {
 			
-			Instant instant = Instant.parse(data); 
-						
-			Date dataReserva = Date.from(instant);
+
+			Date date = new Date(dataHoraMarcacao);
+			String formatted = new SimpleDateFormat("EEE, yyyy-MM-dd HH:mm:ss").format(date);
+
+			System.out.println("All data: " + codigoRestaurante + dataHoraMarcacao + " " + formatted);
 			
-			String diaSemana = new SimpleDateFormat("E").format(dataReserva);
-			String time = new SimpleDateFormat("HH:mm").format(dataReserva);
+			String diaSemana = formatted.split(",")[0];
+			diaSemana = Normalizer.normalize(diaSemana, Normalizer.Form.NFD);
+			diaSemana = diaSemana.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+		    
+			String hora = formatted.split(" ")[2];
 
-			System.out.println("Data Reserva: " + diaSemana + " at time: " + time);
+			System.out.println("Data Reserva: " + diaSemana + " at time: " + hora);
 
-			Ementa ementa = new EmentaDAO().getEmentaInTime(restautante, diaSemana, time);
+			Ementa ementa = new EmentaDAO().getEmentaInTime(restautante, diaSemana, hora);
 
 			System.out.println("Ementa: " + ementa);
 

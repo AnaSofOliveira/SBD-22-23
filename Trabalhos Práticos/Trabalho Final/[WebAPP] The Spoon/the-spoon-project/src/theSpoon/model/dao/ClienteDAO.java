@@ -9,6 +9,7 @@ import java.util.Date;
 
 import theSpoon.model.database.DBConnection;
 import theSpoon.model.entities.Cliente;
+import theSpoon.model.entities.Reserva;
 import theSpoon.model.entities.Utilizador;
 
 public class ClienteDAO implements DAO<Cliente> {
@@ -375,6 +376,45 @@ public class ClienteDAO implements DAO<Cliente> {
 							result.getString("apelido"), result.getInt("idade"), result.getInt("numero"),
 							result.getInt("codigoMorada"), result.getInt("codigoArea"), result.getString("zonaArea"));
 
+				}
+				System.out.println("Commited");
+				return cliente;
+
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				return cliente;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return cliente;
+		}
+	}
+
+	public Cliente getClienteFromReserva(Reserva reserva) {
+		System.out.println("ClienteDAO -> Start getClienteFromReserva");
+		Cliente cliente = null;
+
+		try {
+
+			try {
+				String getCliente = "select c.nif, u.nomeProprio, u.apelido, u.idade, c.numero, c.codigoMorada, c.codigoArea, c.zonaArea " + 
+						"from reserva as r " + 
+						"inner join cliente as c " + 
+						"inner join utilizador as u where u.nif = c.nif and c.numero=r.numeroCliente and r.numeroCliente=? and r.numero=?;";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(getCliente);
+
+				preparedStatement.setInt(1, reserva.getNumeroCliente());
+				preparedStatement.setInt(2, reserva.getNumero());
+				
+				
+				System.out.println(preparedStatement.toString());
+				ResultSet result = preparedStatement.executeQuery();
+
+				while (result.next()) {
+					cliente = new Cliente(result.getInt("nif"), result.getString("nomeProprio"),
+							result.getString("apelido"), result.getInt("idade"), result.getInt("numero"),
+							result.getInt("codigoMorada"), result.getInt("codigoArea"), result.getString("zonaArea"));
 				}
 				System.out.println("Commited");
 				return cliente;
