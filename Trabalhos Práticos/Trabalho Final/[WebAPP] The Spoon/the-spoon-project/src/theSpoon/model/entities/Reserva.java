@@ -32,6 +32,12 @@ public class Reserva {
 		this.dataPedidoReserva = dataPedidoReserva;
 	}
 
+	public Reserva(int numeroReserva, int codigoRestaurante, int numeroCliente) {
+		this.numero = numeroReserva; 
+		this.codigoRestaurante = codigoRestaurante;
+		this.numeroCliente = numeroCliente;
+	}
+
 	public int getNumero() {
 		return numero;
 	}

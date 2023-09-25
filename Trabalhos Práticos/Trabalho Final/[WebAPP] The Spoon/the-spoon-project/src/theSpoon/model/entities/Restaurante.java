@@ -35,6 +35,11 @@ public class Restaurante {
 		this.zonaArea = zonaArea;
 	}
 
+	public Restaurante(int codigoRestaurante) {
+		super();
+		this.codigo = codigoRestaurante; 
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}

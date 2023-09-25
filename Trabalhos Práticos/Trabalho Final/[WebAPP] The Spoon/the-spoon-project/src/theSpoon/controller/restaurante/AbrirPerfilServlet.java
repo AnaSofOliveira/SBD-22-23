@@ -37,10 +37,10 @@ public class AbrirPerfilServlet extends HttpServlet {
 		String tipo = (String) session.getAttribute("tipo");
 
 		if ("cliente".equals(tipo)) {
-			new ClienteService(request, response).abrirPerfil();
+			request.getRequestDispatcher("./perfilCliente.jsp").forward(request, response);
 
 		} else if ("funcionario".equals(tipo)) {
-			new FuncionarioService(request, response).abrirPerfil();
+			request.getRequestDispatcher("./perfilFuncionario.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("./registar.jsp").forward(request, response);
 		}

@@ -5,10 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,13 +13,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
 
-import javax.imageio.stream.FileImageInputStream;
 import java.sql.Blob;
 
 import theSpoon.model.database.DBConnection;
 import theSpoon.model.entities.Ementa;
 import theSpoon.model.entities.Item;
-import theSpoon.model.entities.Mesa;
 import theSpoon.model.entities.Recurso;
 import theSpoon.model.entities.Restaurante;
 
@@ -329,7 +324,6 @@ public class RecursoDAO implements DAO<Recurso> {
 				System.out.println(preparedStatement.toString());
 				ResultSet result = preparedStatement.executeQuery();
 
-				FileOutputStream output;
 				while (result.next()) {
 
 					Blob image = result.getBlob("conteudo");

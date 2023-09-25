@@ -6,10 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import theSpoon.controller.controller;
 import theSpoon.model.database.DBConnection;
 import theSpoon.model.entities.AreaGeografica;
-import theSpoon.model.entities.Morada;
 
 public class AreaGeograficaDAO implements DAO<AreaGeografica> {
 
@@ -32,7 +30,7 @@ public class AreaGeograficaDAO implements DAO<AreaGeografica> {
 			preparedStatement.setString(4, entity.getConcelho());
 			preparedStatement.setString(5, entity.getDistrito());
 
-			System.out.println("=> Instrução SQL: " + preparedStatement.toString());
+			System.out.println("=> Instruï¿½ï¿½o SQL: " + preparedStatement.toString());
 			int result = preparedStatement.executeUpdate();
 
 			if(result == 1) {
@@ -76,7 +74,7 @@ public class AreaGeograficaDAO implements DAO<AreaGeografica> {
 				preparedStatement.setInt(4, entity.getCodigoPostal());
 				preparedStatement.setString(5, entity.getZonaPostal());
 
-				System.out.println("=> Instrução SQL: " + preparedStatement.toString());
+				System.out.println("=> Instruï¿½ï¿½o SQL: " + preparedStatement.toString());
 				int result = preparedStatement.executeUpdate();
 
 				connection.commit();
@@ -114,7 +112,7 @@ public class AreaGeograficaDAO implements DAO<AreaGeografica> {
 				preparedStatement.setInt(1, entity.getCodigoPostal());
 				preparedStatement.setString(2, entity.getZonaPostal());
 
-				System.out.println("=> Instrução SQL: " + preparedStatement.toString());
+				System.out.println("=> Instruï¿½ï¿½o SQL: " + preparedStatement.toString());
 				ResultSet result = preparedStatement.executeQuery();
 
 				while (result.next()) {
@@ -149,7 +147,7 @@ public class AreaGeograficaDAO implements DAO<AreaGeografica> {
 				preparedStatement.setInt(1, entity.getCodigoPostal());
 				preparedStatement.setString(2, entity.getZonaPostal());
 
-				System.out.println("=> Instrução SQL: " + preparedStatement.toString());
+				System.out.println("=> Instruï¿½ï¿½o SQL: " + preparedStatement.toString());
 				int result = preparedStatement.executeUpdate();
 
 				connection.commit();
@@ -181,7 +179,7 @@ public class AreaGeograficaDAO implements DAO<AreaGeografica> {
 
 				PreparedStatement preparedStatement = connection.prepareStatement(getAreaGeografica);
 
-				System.out.println("=> Instrução SQL: " + preparedStatement.toString());
+				System.out.println("=> Instruï¿½ï¿½o SQL: " + preparedStatement.toString());
 				ResultSet result = preparedStatement.executeQuery();
 
 				AreaGeografica areaGeografica = null;
@@ -218,7 +216,7 @@ public class AreaGeograficaDAO implements DAO<AreaGeografica> {
 				preparedStatement.setInt(1, codigoPostal);
 				preparedStatement.setString(2, zonaPostal);
 				
-				System.out.println("=> Instrução SQL: " + preparedStatement.toString());
+				System.out.println("=> Instruï¿½ï¿½o SQL: " + preparedStatement.toString());
 				ResultSet result = preparedStatement.executeQuery();
 
 				while (result.next()) {

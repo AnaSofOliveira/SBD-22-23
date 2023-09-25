@@ -2,8 +2,8 @@
 <!-- HEADER -->
 <%@include file='../header.jsp'%>
 
-
 <div class="container-fluid">
+<h1 class="text-center mb-4 mt-5">Restaurantes Disponiveis</h1>
 	<div class="row justify-content-md-center">
 		<c:forEach var="restaurante" items="${restaurantes}" varStatus="loop">
 

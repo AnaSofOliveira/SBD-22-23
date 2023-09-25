@@ -7,12 +7,14 @@ public class Item {
 	private String descricao;
 	private TipoItem tipo;
 	private int idRecurso;
+	private int quantidade;
 	
 	public Item(String designacao, TipoItem tipo, int idRecurso) {
 		super();
 		this.designacao = designacao;
 		this.tipo = tipo;
 		this.idRecurso = idRecurso;
+		this.quantidade = 0;
 	}
 
 	public Item(int id, String designacao, TipoItem tipo, int idRecurso) {
@@ -21,6 +23,7 @@ public class Item {
 		this.designacao = designacao;
 		this.tipo = tipo;
 		this.idRecurso = idRecurso;
+		this.quantidade = 0;
 	}
 
 	public Item(int id, String designacao, String descricao, TipoItem tipo, int idRecurso) {
@@ -30,6 +33,17 @@ public class Item {
 		this.descricao = descricao;
 		this.tipo = tipo;
 		this.idRecurso = idRecurso;
+		this.quantidade = 0;
+	}
+	
+	public Item(int id, String designacao, String descricao, TipoItem tipo, int idRecurso, int quantidade) {
+		super();
+		this.id = id;
+		this.designacao = designacao;
+		this.descricao = descricao;
+		this.tipo = tipo;
+		this.idRecurso = idRecurso;
+		this.quantidade = quantidade;
 	}
 
 	public int getId() {
@@ -72,13 +86,21 @@ public class Item {
 		this.idRecurso = idRecurso;
 	}
 
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", designacao=" + designacao + ", descricao=" + descricao + ", tipo=" + tipo
-				+ ", recurso=" + idRecurso + "]";
+				+ ", idRecurso=" + idRecurso + ", quantidade=" + quantidade + "]";
 	}
-
-	// TODO - Constructors Item
+	
+		// TODO - Constructors Item
 	// TODO - Getters and Setters Item
 	// TODO - toString Item
 
