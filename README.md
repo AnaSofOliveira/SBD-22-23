@@ -1,11 +1,11 @@
 # The Spoon
 
+![TheSpoon](the_spoon.png)
 
 ## Tabela de Conteúdos
 
 - [Visão Geral](#visão-geral)
 - [Dependências](#dependencias)
-- [Interface Gráfica](#interface-grafica)
 
 
 ## Visão Geral
@@ -26,9 +26,5 @@ Os funcionários do restaurante conseguem confirmar e cancelar as reservas efect
 - MySQL Java Connector 8.0.32
 - JSTL 1.2
 
-
-## Interface Gráfica
-
-![TheSpoon](the_spoon.png)
 
 
